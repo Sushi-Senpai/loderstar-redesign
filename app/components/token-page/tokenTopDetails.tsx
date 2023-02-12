@@ -11,9 +11,9 @@ function TokenTopDetails({ marketInfo }: { marketInfo: object | boolean }) {
     coins: [{}],
   });
   const isBorrowable = true;
-  const borrowApy = isBorrowable ? marketInfo.borrowApy * -1 : 0;
+  const borrowApy = (Math.pow(marketInfo?.borrowRate * 7200 + 1, 365) - 1) * 100;
 
-  const supplyApy = marketInfo.supplyApy;
+  const supplyApy = (Math.pow(marketInfo?.supplyRate * 7200 + 1, 365) - 1) * 100;
 
   return (
     <>

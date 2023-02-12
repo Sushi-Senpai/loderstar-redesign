@@ -202,7 +202,6 @@ export function useMarketsInfo() {
       signer
     );
 
-    console.log(address);
     // let chainLinkContract = new ethers.Contract(
     //   '0x639fe6ab55c921f74e7fac1ee960c0b6293ba612',
     //   chainlinkAbi,
