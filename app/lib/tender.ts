@@ -17,6 +17,7 @@ import type {
 } from "@ethersproject/providers";
 import sampleCEtherAbi from "~/config/sample-CEther-abi";
 import chainlinkAbi from "~/config/chainlink-abi";
+import sampleCtokenAbi from "~/config/sample-ctoken-abi";
 
 // more info: https://github.com/ethereum/solidity/issues/533#issuecomment-218776352
 const NEGATIVE_UINT = BigNumber.from("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")
@@ -414,7 +415,7 @@ async function borrow(
     console.log("borrow() with cEth");
 
     const formattedValue = ethers.utils.parseEther(value);
-    console.log("input value:", value, "formattedValue:", formattedValue);
+    console.log("input value:", value, "formattedValue:", formattedValue.toString());
     console.log("address:", cToken.address, "abi:", sampleCEtherAbi);
 
     let contract = new ethers.Contract(cToken.address, sampleCEtherAbi, signer);
@@ -428,7 +429,7 @@ async function borrow(
     );
 
     console.log("input value:", value, "formattedValue:", formattedValue);
-    console.log("address:", cToken.address, "abi:", sampleCEtherAbi);
+    console.log("address:", cToken.address, "abi:", sampleCtokenAbi);
 
     let contract = new ethers.Contract(cToken.address, SampleCTokenAbi, signer);
     return await contract.borrow(formattedValue);
