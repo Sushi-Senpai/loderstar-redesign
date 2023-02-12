@@ -50,7 +50,7 @@ export default function EarnContent() {
           Please read the{" "}
           <a
             className="line-solid cursor-pointer text-white"
-            href="https://docs.tender.fi/tendienomics/rewards-and-incentives"
+            href="https://docs.lodestarfinance.io/tendienomics/rewards-and-incentives"
             target="_blank"
             rel="noreferrer"
           >
@@ -201,7 +201,7 @@ export default function EarnContent() {
                               target="_blank"
                               rel="noreferrer"
                               className="line-solid cursor-pointer capitalize text-white"
-                              href="https://docs.tender.fi/tendienomics/rewards-and-incentives#multiplier-points"
+                              href="https://docs.lodestarfinance.io/tendienomics/rewards-and-incentives#multiplier-points"
                             >
                               More info.
                             </a>
@@ -283,22 +283,22 @@ export default function EarnContent() {
                 {onClient && isActive ? (
                   <>
                     <div className="btn-custom-border rounded-[6px]">
-                      <button className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#14F195] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] hover:bg-[#1e573fb5]">
+                      <button className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#E5D540] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] hover:bg-[#1e573fb5]">
                         Buy TND
                       </button>
                     </div>
                     <div className="btn-custom-border rounded-[6px]">
-                      <button className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#14F195] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] hover:bg-[#1e573fb5]">
+                      <button className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#E5D540] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] hover:bg-[#1e573fb5]">
                         STAKE
                       </button>
                     </div>
                     <div className="btn-custom-border rounded-[6px]">
-                      <button className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#14F195] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] uppercase hover:bg-[#1e573fb5]">
+                      <button className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#E5D540] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] uppercase hover:bg-[#1e573fb5]">
                         unStake
                       </button>
                     </div>
                     <div className="btn-custom-border rounded-[6px]">
-                      <button className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#14F195] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] uppercase hover:bg-[#1e573fb5]">
+                      <button className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#E5D540] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] uppercase hover:bg-[#1e573fb5]">
                         Transfer account
                       </button>
                     </div>
@@ -310,7 +310,7 @@ export default function EarnContent() {
                     rel="noreferrer"
                     href="https://metamask.io/"
                   >
-                    <button className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#14F195] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] hover:bg-[#1e573fb5]">
+                    <button className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#E5D540] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] hover:bg-[#1e573fb5]">
                       CONNECT WALLET
                     </button>
                   </a>
@@ -318,7 +318,7 @@ export default function EarnContent() {
                   !isActive && (
                     <button
                       onClick={() => connect()}
-                      className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#14F195] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] hover:bg-[#1e573fb5]"
+                      className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#E5D540] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] hover:bg-[#1e573fb5]"
                     >
                       CONNECT WALLET
                     </button>
@@ -428,7 +428,7 @@ export default function EarnContent() {
                               target="_blank"
                               rel="noreferrer"
                               className="line-solid cursor-pointer capitalize text-white"
-                              href="https://docs.tender.fi/tendienomics/rewards-and-incentives#multiplier-points"
+                              href="https://docs.lodestarfinance.io/tendienomics/rewards-and-incentives#multiplier-points"
                             >
                               More info.
                             </a>
@@ -469,12 +469,12 @@ export default function EarnContent() {
                 {onClient && isActive ? (
                   <>
                     <div className="btn-custom-border rounded-[6px]">
-                      <button className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#14F195] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] hover:bg-[#1e573fb5]">
+                      <button className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#E5D540] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] hover:bg-[#1e573fb5]">
                         STAKE
                       </button>
                     </div>
                     <div className="btn-custom-border rounded-[6px]">
-                      <button className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#14F195] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] uppercase hover:bg-[#1e573fb5]">
+                      <button className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#E5D540] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] uppercase hover:bg-[#1e573fb5]">
                         unStake
                       </button>
                     </div>
@@ -486,7 +486,7 @@ export default function EarnContent() {
                     rel="noreferrer"
                     href="https://metamask.io/"
                   >
-                    <button className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#14F195] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] hover:bg-[#1e573fb5]">
+                    <button className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#E5D540] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] hover:bg-[#1e573fb5]">
                       CONNECT WALLET
                     </button>
                   </a>
@@ -494,7 +494,7 @@ export default function EarnContent() {
                   !isActive && (
                     <button
                       onClick={() => connect()}
-                      className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#14F195] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] hover:bg-[#1e573fb5]"
+                      className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#E5D540] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] hover:bg-[#1e573fb5]"
                     >
                       CONNECT WALLET
                     </button>
@@ -574,7 +574,7 @@ export default function EarnContent() {
                 <div className="btn-custom-border rounded-[6px]">
                   <button
                     onClick={() => window.open("/", "_blank")}
-                    className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#14F195] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] uppercase hover:bg-[#1e573fb5]"
+                    className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#E5D540] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] uppercase hover:bg-[#1e573fb5]"
                   >
                     Dashboard
                   </button>
@@ -583,7 +583,7 @@ export default function EarnContent() {
                   onClick={() => window.open("/markets/", "_blank")}
                   className="btn-custom-border rounded-[6px]"
                 >
-                  <button className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#14F195] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] uppercase hover:bg-[#1e573fb5]">
+                  <button className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#E5D540] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] uppercase hover:bg-[#1e573fb5]">
                     Markets
                   </button>
                 </div>
@@ -650,7 +650,7 @@ export default function EarnContent() {
                               target="_blank"
                               rel="noreferrer"
                               className="line-solid cursor-pointer capitalize text-white"
-                              href="https://docs.tender.fi/tendienomics/rewards-and-incentives#multiplier-points"
+                              href="https://docs.lodestarfinance.io/tendienomics/rewards-and-incentives#multiplier-points"
                             >
                               More info.
                             </a>
@@ -688,7 +688,7 @@ export default function EarnContent() {
                               target="_blank"
                               rel="noreferrer"
                               className="line-solid cursor-pointer capitalize text-white"
-                              href="https://docs.tender.fi/tendienomics/rewards-and-incentives#multiplier-points"
+                              href="https://docs.lodestarfinance.io/tendienomics/rewards-and-incentives#multiplier-points"
                             >
                               More info.
                             </a>
@@ -713,7 +713,7 @@ export default function EarnContent() {
                 {onClient && isActive ? (
                   <>
                     <div className="btn-custom-border rounded-[6px]">
-                      <button className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#14F195] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] uppercase hover:bg-[#1e573fb5]">
+                      <button className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#E5D540] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] uppercase hover:bg-[#1e573fb5]">
                         Compound
                       </button>
                     </div>
@@ -723,7 +723,7 @@ export default function EarnContent() {
                         setDataClaimModal({ ...dataClaimModal, open: true })
                       }
                     >
-                      <button className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#14F195] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] uppercase hover:bg-[#1e573fb5]">
+                      <button className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#E5D540] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] uppercase hover:bg-[#1e573fb5]">
                         Claim
                       </button>
                     </div>
@@ -735,7 +735,7 @@ export default function EarnContent() {
                     rel="noreferrer"
                     href="https://metamask.io/"
                   >
-                    <button className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#14F195] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] hover:bg-[#1e573fb5]">
+                    <button className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#E5D540] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] hover:bg-[#1e573fb5]">
                       CONNECT WALLET
                     </button>
                   </a>
@@ -743,7 +743,7 @@ export default function EarnContent() {
                   !isActive && (
                     <button
                       onClick={() => connect()}
-                      className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#14F195] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] hover:bg-[#1e573fb5]"
+                      className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#E5D540] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] hover:bg-[#1e573fb5]"
                     >
                       CONNECT WALLET
                     </button>
@@ -761,7 +761,7 @@ export default function EarnContent() {
           Convert esTND tokens to TND tokens. Please read the{" "}
           <a
             className="cursor-pointer line-solid text-white"
-            href="https://docs.tender.fi/tendienomics/rewards-and-incentives#vesting"
+            href="https://docs.lodestarfinance.io/tendienomics/rewards-and-incentives#vesting"
             target="_blank"
             rel="noreferrer"
           >
@@ -880,12 +880,12 @@ export default function EarnContent() {
                 {onClient && isActive ? (
                   <>
                     <div className="btn-custom-border rounded-[6px]">
-                      <button className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#14F195] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] uppercase hover:bg-[#1e573fb5]">
+                      <button className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#E5D540] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] uppercase hover:bg-[#1e573fb5]">
                         Deposit
                       </button>
                     </div>
                     <div className="btn-custom-border rounded-[6px]">
-                      <button className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#14F195] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] uppercase hover:bg-[#1e573fb5]">
+                      <button className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#E5D540] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] uppercase hover:bg-[#1e573fb5]">
                         Withdraw
                       </button>
                     </div>
@@ -897,7 +897,7 @@ export default function EarnContent() {
                     rel="noreferrer"
                     href="https://metamask.io/"
                   >
-                    <button className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#14F195] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] hover:bg-[#1e573fb5]">
+                    <button className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#E5D540] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] hover:bg-[#1e573fb5]">
                       CONNECT WALLET
                     </button>
                   </a>
@@ -905,7 +905,7 @@ export default function EarnContent() {
                   !isActive && (
                     <button
                       onClick={() => connect()}
-                      className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#14F195] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] hover:bg-[#1e573fb5]"
+                      className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#E5D540] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] hover:bg-[#1e573fb5]"
                     >
                       CONNECT WALLET
                     </button>

@@ -230,7 +230,7 @@ const ChartSupply = ({ data }: { data: IDataSupplyDot[] }) => {
                 isAnimationActive={false}
                 type="monotone"
                 dataKey="supplyAPY"
-                stroke="#14F195"
+                stroke="#E5D540"
                 strokeWidth={3}
                 dot={false}
                 activeDot={<CustomDot />}
@@ -283,7 +283,7 @@ const ChartSupply = ({ data }: { data: IDataSupplyDot[] }) => {
                 {data.map((entry: IDataSupplyDot, index: number) => (
                   <Cell
                     key={index}
-                    fill={activeTooltip === index ? "#14F195" : "#282C2B"}
+                    fill={activeTooltip === index ? "#E5D540" : "#282C2B"}
                   />
                 ))}
               </Bar>

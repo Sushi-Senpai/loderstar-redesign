@@ -51,7 +51,7 @@ export default function TooltipMobile(props: {
                 {props.mobileTooltipData.token}
               </span>
             </div>
-            <span className="font-nova font-normal text-sm leading-[14px] lg:leading-[17px] text-[#14F195]">
+            <span className="font-nova font-normal text-sm leading-[14px] lg:leading-[17px] text-[#E5D540]">
               {props.mobileTooltipData.textBottom}
             </span>
           </div>

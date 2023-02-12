@@ -23,14 +23,14 @@ export default function MarketsContent() {
   const totalSuppliedUsd = m
     .map(
       (token: Market) =>
-        token.tokenPair.token.priceInUsd * (token.marketData.marketSize ?? 0)
+        token.tokenPair.token.priceInEth * (token.marketData.marketSize ?? 0)
     )
     .reduce((a: any, b: any) => a + b, 0);
 
   const totalBorrowedUsd = m
     .map(
       (token: Market) =>
-        token.tokenPair.token.priceInUsd * (token.marketData.totalBorrowed ?? 0)
+        token.tokenPair.token.priceInEth * (token.marketData.totalBorrowed ?? 0)
     )
     .reduce((a: any, b: any) => a + b, 0);
 
@@ -96,7 +96,7 @@ export default function MarketsContent() {
                   <div key={index} className="flex flex-col gap-y-[10px]">
                     <label className="flex justify-between text-sm md:text-base leading-[20px] md:leading-[22px]">
                       <p className="uppercase">{m.symbol}</p>
-                      <div key={index} className="text-[#14F195]">
+                      <div key={index} className="text-[#E5D540]">
                         <span>{marketPercentage}</span>
                         <span>%</span>
                       </div>
@@ -105,7 +105,7 @@ export default function MarketsContent() {
                       <div
                         className="w-full h-full bg-green-300 mr-2 h-[3px] absolute bottom-0 left-0 zIndex-1 flex justify-end"
                         style={{
-                          background: "#14F195",
+                          background: "#E5D540",
                           width: `${marketPercentage}%`,
                           transition: "width 1s ease-out",
                         }}
@@ -119,7 +119,7 @@ export default function MarketsContent() {
               })}
             </div>
           </div>
-          <div className="flex flex-col pt-[19px] pb-[25px] px-[15px] md:py-[23px] md:px-[30px]">
+          {/* <div className="flex flex-col pt-[19px] pb-[25px] px-[15px] md:py-[23px] md:px-[30px]">
             <div className="flex justify-between items-center mb-[11px] md:mb-[15px] font-nova text-xs leading-[17px] md:text-sm md:leading-[20px] font-semibold text-[#818987]">
               <p>24H Supply Volume</p>
               <p># of Suppliers</p>
@@ -143,7 +143,7 @@ export default function MarketsContent() {
                 <span>{total?.supply?.count}</span>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
         <div
           tabIndex={0}
@@ -188,7 +188,7 @@ export default function MarketsContent() {
                   <div key={index} className="flex flex-col gap-y-[10px]">
                     <label className="flex justify-between text-sm md:text-base leading-[20px] md:leading-[22px]">
                       <p className="uppercase">{m.symbol}</p>
-                      <div className="text-[#00E0FF]">
+                      <div className="text-[#E69E40]">
                         <span>{marketPercentage}</span>
                         <span>%</span>
                       </div>
@@ -197,7 +197,7 @@ export default function MarketsContent() {
                       <div
                         className="w-full h-full bg-green-300 mr-2 h-[3px] absolute bottom-0 left-0 zIndex-1 flex justify-end"
                         style={{
-                          background: "#00E0FF",
+                          background: "#E69E40",
                           width: `${marketPercentage}%`,
                           transition: "width 1s ease-out",
                         }}
@@ -211,7 +211,7 @@ export default function MarketsContent() {
               })}
             </div>
           </div>
-          <div className="flex flex-col pt-[19px] pb-[25px] px-[15px] md:py-[23px] md:px-[30px]">
+          {/* <div className="flex flex-col pt-[19px] pb-[25px] px-[15px] md:py-[23px] md:px-[30px]">
             <div className="flex justify-between items-center mb-[11px] md:mb-[15px] font-nova text-xs leading-[17px] md:text-sm md:leading-[20px] font-semibold text-[#818987]">
               <p>24H Borrow Volume</p>
               <p># of Borrowers</p>
@@ -235,7 +235,7 @@ export default function MarketsContent() {
                 <span>{total?.borrow?.count}</span>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="max-w-[1068px] mx-[auto] mb-[60px] md:mb-[100px]">
@@ -270,7 +270,7 @@ export default function MarketsContent() {
               {Object.keys(markets).map((id: string, index: number) => {
                 const m = markets[id];
                 const borrowApy = m.borrowApy * -1;
-                const isBorrowable = m.symbol !== "GLP";
+                const isBorrowable = true;
                 return (
                   <tr
                     key={index}

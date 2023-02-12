@@ -29,6 +29,7 @@ export function useSafeMaxWithdrawAmountForToken(
   let [safeMaxWithdrawAmount, setSafeMaxWithdrawAmountForToken] =
     useState<number>(0);
 
+  const tenderContextData = useContext(TenderContext);
   let { currentTransaction } = useContext(TenderContext);
 
   useEffect(() => {
@@ -37,15 +38,15 @@ export function useSafeMaxWithdrawAmountForToken(
      * (borrowedAmount / borrowedLimit) * 100
      *
      * //projectBorrowLimit
-     * borrowLimitChangeInUsd = tokenAmount * tp.token.priceInUsd * collateralFactor
+     * borrowLimitChangeInUsd = tokenAmount * tp.token.priceInEth * collateralFactor
      * borrowedLimit = currentBorrowLimitInUsd + borrowLimitChangeInUsd
      *
      * //result
-     * borrowLimitUsed = (borrowedAmount / (currentBorrowLimitInUsd + (tokenAmount * tp.token.priceInUsd * collateralFactor))) * 100
-     * borrowLimitUsed / 100 = borrowedAmount / (currentBorrowLimitInUsd + (tokenAmount * tp.token.priceInUsd * collateralFactor))
-     * borrowedAmount / (borrowLimitUsed / 100) = currentBorrowLimitInUsd + (tokenAmount * tp.token.priceInUsd * collateralFactor)
-     * (borrowedAmount / (borrowLimitUsed / 100)) - currentBorrowLimitInUsd = tokenAmount * tp.token.priceInUsd * collateralFactor
-     * (((borrowedAmount / (borrowLimitUsed / 100)) - currentBorrowLimitInUsd)) / (tp.token.priceInUsd * collateralFactor) = tokenAmount
+     * borrowLimitUsed = (borrowedAmount / (currentBorrowLimitInUsd + (tokenAmount * tp.token.priceInEth * collateralFactor))) * 100
+     * borrowLimitUsed / 100 = borrowedAmount / (currentBorrowLimitInUsd + (tokenAmount * tp.token.priceInEth * collateralFactor))
+     * borrowedAmount / (borrowLimitUsed / 100) = currentBorrowLimitInUsd + (tokenAmount * tp.token.priceInEth * collateralFactor)
+     * (borrowedAmount / (borrowLimitUsed / 100)) - currentBorrowLimitInUsd = tokenAmount * tp.token.priceInEth * collateralFactor
+     * (((borrowedAmount / (borrowLimitUsed / 100)) - currentBorrowLimitInUsd)) / (tp.token.priceInEth * collateralFactor) = tokenAmount
      * */
     const getSafeMaxWithdrawAmountForToken = async () => {
       if (!signer) {
@@ -73,7 +74,7 @@ export function useSafeMaxWithdrawAmountForToken(
       const amount: number = Math.abs(
         (totalBorrowedAmountInUsd / (borrowLimitUsed / 100) -
           currentBorrowLimitInUsd) /
-          (tp.token.priceInUsd * collateralFactor)
+        (tp.token.priceInEth * collateralFactor)
       );
       console.log("safeMaxWithdrawAmount", amount);
       setSafeMaxWithdrawAmountForToken(amount);

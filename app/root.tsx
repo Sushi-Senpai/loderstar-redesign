@@ -32,7 +32,7 @@ export const links: LinksFunction = () => [
   { rel: "stylesheet", href: globalStyles },
 ];
 export const meta: MetaFunction = () => {
-  return { title: "Tender.fi" };
+  return { title: "lodestarfinance.io" };
 };
 
 if (process.env.NODE_ENV === "production")
@@ -84,10 +84,10 @@ export function CatchBoundary() {
       <body className="h-[100vh] relative flex flex-col justify-between">
         <header className="mt-0 mb-0 flex w-full c items-center justify-between max-w-[1400px] relative h-[71px] lg:h-[110px] flex items-center">
           <a
-            href="https://tender.fi"
+            href="https://lodestarfinance.io"
             className="w-[104px] block lg:w-[196px] z-20 relative"
           >
-            <img src="/images/logo1.svg" alt="Tender Finance" />
+            <img src="/images/logo1.svg" alt="Lodestar Finance" />
           </a>
         </header>
         <img
@@ -107,7 +107,7 @@ export function CatchBoundary() {
           <div className="ml-[auto] mr-[auto] btn-custom-border rounded-[6px] w-[160px] h-[50px] md:w-[180px] md:h-[60px]">
             <a
               href="/"
-              className="font-space flex font-bold items-center justify-center w-full h-full rounded-[6px] text-[#14F195] text-[15px] leading-5 bg-[#0e3625] relative z-[2] hover:bg-[#1e573fb5]"
+              className="font-space flex font-bold items-center justify-center w-full h-full rounded-[6px] text-[#E5D540] text-[15px] leading-5 bg-[#0e3625] relative z-[2] hover:bg-[#1e573fb5]"
             >
               BACK TO HOME
             </a>

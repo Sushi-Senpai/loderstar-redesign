@@ -1,6 +1,6 @@
 import { type JsonRpcSigner } from "@ethersproject/providers";
 import { useState, useEffect } from "react";
-import { getAssetPriceInUsd } from "~/lib/tender";
+import { getAssetPriceInEth } from "~/lib/tender";
 import type {
   NetworkData,
   cToken,
@@ -17,7 +17,7 @@ async function generateTokenPair(
   let token: TokenConfig = networkData.Tokens[symbol];
   let cToken: cToken = token.cToken;
 
-  let priceInUsd = await getAssetPriceInUsd(
+  let priceInEth = await getAssetPriceInEth(
     signer,
     networkData.Contracts.PriceOracle,
     token.cToken,
@@ -27,7 +27,7 @@ async function generateTokenPair(
   return {
     token: {
       ...token,
-      priceInUsd: priceInUsd,
+      priceInEth: priceInEth,
     },
     cToken,
   };

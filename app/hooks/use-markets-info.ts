@@ -1,11 +1,13 @@
 import { useContext, useEffect, useState } from "react";
-import { gql, request } from "graphql-request";
 import { hooks as Web3Hooks } from "~/connectors/meta-mask";
 import { useWeb3Signer } from "~/hooks/use-web3-signer";
 import { TenderContext } from "~/contexts/tender-context";
-import { useGlpApy } from "./use-glp-apy";
 import { useInterval } from "./use-interval";
-import { useGmxApy } from "./use-gmx-apy";
+import { ethers } from "ethers";
+import sampleCtokenAbi from "~/config/sample-ctoken-abi";
+import { formatBigNumber } from "~/lib/tender"
+import chainlinkAbi from "~/config/chainlink-abi";
+import samplePriceOracleAbi from "~/config/sample-price-oracle-abi";
 
 const getPercentageChange = function (
   currentValue: number,
@@ -14,22 +16,27 @@ const getPercentageChange = function (
   return ((currentValue - prevValue) / currentValue) * 100;
 };
 
-const getLatestBlock = async function (graphUrl: string) {
-  const response = await request(
-    graphUrl,
-    gql`
-      {
-        _meta {
-          block {
-            number
-          }
-        }
-      }
-    `
-  );
+// const cTokenAddresses = ["0xb4d58C1F5870eFA4B05519A72851227F05743273",
+//   "0xD2835B08795adfEfa0c2009B294ae84B08C6a67e",
+//   "0x5E3F2AbaECB51A182f05b4b7c0f7a5da1942De90",
+//   "0xeB156f76Ef69be485c18C297DeE5c45390345187",
+//   "0x12997C5C005acc6933eDD5e91D9338e7635fc0BB",
+//   "0x46178d84339A04f140934EE830cDAFDAcD29Fba9",
+//   "0xc33cCF8d387DB5e84De13496E40DD83934F3251B",
+//   "0x7a668f56affd511ffc83c31666850eae9fd5bcc8",
+//   "0x5FfA22244D8273d899B6C20CEC12A88a7Cd9E460",
+//   "0xCC25daC54A1a62061b596fD3Baf7D454f34c56fF"];
+const cTokenAddresses = ["0x11caD8E4323123E12E33C88A79D97D55cd6f91aC",
+  "0xc3Df2FFB5336C05aeA13B4e2A5e0d2E97909330a",
+  "0xBBc29a53A87e340d1986570Bafb6Bfa709081E6C",
+  "0xB28752bA41a4714a79aAF0Bed369851c44436e81",
+  "0xcC3D0d211dF6157cb94b5AaCfD55D41acd3a9A7A",
+  "0x25e6267C8a6f0A9b705B7dd9971196711765E0b8",
+  "0xbedf9898bf9ce80a24aD02aeBA43ba7A943C39EE",
+  "0x5FfA22244D8273d899B6C20CEC12A88a7Cd9E460",
+  "0x315B96C352CD67E3263D9EB6574E70B09A9f321B",
+  "0xF6eE884Ebd0ea58BBaC3396e41E4724C420f2B50"];
 
-  return response?._meta?.block?.number ? response._meta.block.number : 0;
-};
 
 export function useMarketsInfo() {
   const pollingKey = useInterval(7_000);
@@ -40,8 +47,6 @@ export function useMarketsInfo() {
   const { networkData, tokenPairs } = useContext(TenderContext);
   const provider = Web3Hooks.useProvider();
   const signer = useWeb3Signer(provider);
-  const getGlpApy = useGlpApy();
-  const getGmxApy = useGmxApy();
 
   useEffect(() => {
     console.log("useMarketsInfo called");
@@ -55,19 +60,11 @@ export function useMarketsInfo() {
       const prevMarkets = {};
       const secondsPerBlock = networkData.secondsPerBlock;
       const l2SecondsPerBlock = networkData.l2SecondsPerBlock;
-      const graphUrl = networkData.graphUrl;
       const tokens = networkData.Tokens;
       const addresses: string[] = [];
 
-      const l2BlockNumber = await getLatestBlock(graphUrl);
-
-      if (l2BlockNumber === 0) {
-        return;
-      }
-
       const blocksPerDay = Math.round((60 * 60 * 24) / secondsPerBlock);
       const l2BlocksPerDay = Math.round((60 * 60 * 24) / l2SecondsPerBlock);
-      const l2PrevDayBlock = l2BlockNumber - l2BlocksPerDay;
 
       Object.keys(tokens).forEach((key) => {
         const address = tokens[key].cToken.address.toLowerCase();
@@ -81,63 +78,27 @@ export function useMarketsInfo() {
       });
 
       const searchStr = addresses.join('","');
+      let response = {
+        markets: new Array<any>(),
+        accountCTokens: new Array<any>()
+      }
 
-      const response = await request(
-        graphUrl,
-        gql`
-    {
-  markets(where: {id_in: ["${searchStr}"]}) {
-    symbol
-    underlyingSymbol
-    borrowRate
-    cash
-    reserves
-    supplyRate
-    id
-    totalBorrows
-    underlyingPriceUSD
-  },
-  prevMarkets:markets(block:{number: ${l2PrevDayBlock}} where: {id_in: ["${searchStr}"]}) {
-    borrowRate
-    cash
-    reserves
-    supplyRate
-    id
-    totalBorrows
-    underlyingPriceUSD
-  },
-  borrowVolume:borrowEvents(where:{blockNumber_gt:${l2PrevDayBlock}}) {
-    underlyingSymbol
-    amount
-  },
-  repayVolume:repayEvents(where:{blockNumber_gt:${l2PrevDayBlock}}) {
-    underlyingSymbol
-    amount
-  },
-  supplyVolume:mintEvents(where:{blockNumber_gt:${l2PrevDayBlock}}) {
-    cTokenSymbol
-    underlyingAmount
-  },
-  redeemVolume:redeemEvents(where:{blockNumber_gt:${l2PrevDayBlock}}) {
-    cTokenSymbol
-    underlyingAmount
-  },
-    accountCTokens (where: {enteredMarket: true}) {
-      id
-      cTokenBalance
-      totalUnderlyingBorrowed
-      totalUnderlyingSupplied
-    }
-}
-`
-      );
+      response.markets.push(await getTokenMarketInfo(cTokenAddresses[0]));
+      response.markets.push(await getTokenMarketInfo(cTokenAddresses[1]));
+      response.markets.push(await getTokenMarketInfo(cTokenAddresses[2]));
+      response.markets.push(await getTokenMarketInfo(cTokenAddresses[3]));
+      response.markets.push(await getTokenMarketInfo(cTokenAddresses[4]));
+      response.markets.push(await getTokenMarketInfo(cTokenAddresses[5]));
+      response.markets.push(await getTokenMarketInfo(cTokenAddresses[6]));
+      response.markets.push(await getTokenMarketInfo(cTokenAddresses[7]));
+      response.markets.push(await getTokenMarketInfo(cTokenAddresses[8]));
+      response.markets.push(await getTokenMarketInfo(cTokenAddresses[9]));
+
+      let tokenMarkets: any[] = [];
 
       if (
         !response ||
         typeof response.markets === "undefined" ||
-        typeof response.prevMarkets === "undefined" ||
-        typeof response.borrowVolume === "undefined" ||
-        typeof response.supplyVolume === "undefined" ||
         typeof response.accountCTokens === "undefined"
       ) {
         return;
@@ -165,33 +126,9 @@ export function useMarketsInfo() {
       const uniqueSuppliers = {};
       const uniqueBorrowers = {};
 
-      response.prevMarkets.forEach(
-        (m: {
-          reserves: string;
-          borrowRate: number;
-          underlyingPriceUSD: any;
-          totalBorrows: any;
-          cash: string;
-          supplyRate: number;
-          id: string;
-        }) => {
-          prevMarkets[m.id.toLowerCase()] = m;
-        }
-      );
-
-      let prevSupplyUsd = 0;
-      let prevBorrowUsd = 0;
 
       const usdPricesByCToken = {};
       const usdPricesByToken = {};
-      const glpTokenPair = tokenPairs.find((tp) => tp.token.symbol === "GLP");
-      const gmxTokenPair = tokenPairs.find((tp) => tp.token.symbol === "GMX");
-      const glpApy = await getGlpApy(signer, glpTokenPair!);
-      const gmxApy = await getGmxApy(
-        signer,
-        gmxTokenPair!,
-        networkData.Contracts.PriceOracle
-      );
 
       response.markets.forEach(
         async (m: {
@@ -210,20 +147,12 @@ export function useMarketsInfo() {
             (tp) => tp.cToken.address.toLowerCase() === id
           );
           const underlyingPriceUSD = tokenPair
-            ? tokenPair.token.priceInUsd
+            ? tokenPair.token.priceInEth
             : m.underlyingPriceUSD;
 
           const supplyRate = m.supplyRate / ethBlocksPerYear;
-          if (tokenPair?.token?.symbol === "GLP") {
-            markets[id].supplyApy = glpApy;
-          } else if (tokenPair?.token?.symbol === "GMX") {
-            const tokenSupplyApy =
-              (Math.pow(supplyRate * blocksPerDay + 1, daysPerYear) - 1) * 100;
-            markets[id].supplyApy = gmxApy + tokenSupplyApy;
-          } else {
-            markets[id].supplyApy =
-              (Math.pow(supplyRate * blocksPerDay + 1, daysPerYear) - 1) * 100;
-          }
+          markets[id].supplyApy =
+            (Math.pow(supplyRate * blocksPerDay + 1, daysPerYear) - 1) * 100;
 
           markets[id].totalSupply =
             parseFloat(m.cash) +
@@ -238,107 +167,14 @@ export function useMarketsInfo() {
           markets[id].totalBorrow = parseFloat(m.totalBorrows);
           markets[id].totalBorrowUsd = m.totalBorrows * underlyingPriceUSD;
 
-          markets[id].totalBorrowersCount = response.accountCTokens.filter(
-            (account: { id: string; totalUnderlyingBorrowed: number }) => {
-              const [accountMarketId, accountId] = account.id.split("-");
-              const valid =
-                account.totalUnderlyingBorrowed > 0 &&
-                accountMarketId.toLowerCase() === id;
-
-              if (valid) {
-                uniqueBorrowers[accountId] = true;
-              }
-
-              return valid;
-            }
-          ).length;
-
-          markets[id].totalSuppliersCount = response.accountCTokens.filter(
-            (account: { id: string; cTokenBalance: number }) => {
-              const [accountMarketId, accountId] = account.id.split("-");
-              const valid =
-                account.cTokenBalance > 0 &&
-                accountMarketId.toLowerCase() === id;
-
-              if (valid) {
-                uniqueSuppliers[accountId] = true;
-              }
-
-              return valid;
-            }
-          ).length;
-
           // total in usd
           total.borrow.usd += markets[id].totalBorrow * underlyingPriceUSD;
           total.supply.usd += markets[id].totalSupply * underlyingPriceUSD;
 
           usdPricesByCToken[m.symbol] = underlyingPriceUSD;
           usdPricesByToken[m.underlyingSymbol] = underlyingPriceUSD;
-
-          // @todo refactor
-          if (typeof prevMarkets[id] !== "undefined") {
-            const prevSupplyRate =
-              prevMarkets[id].supplyRate / ethBlocksPerYear;
-            const prevSupplyApy =
-              (Math.pow(prevSupplyRate * blocksPerDay + 1, daysPerYear) - 1) *
-              100;
-            const prevTotalSupplyUsd =
-              (parseFloat(prevMarkets[id].cash) +
-                parseFloat(prevMarkets[id].totalBorrows) -
-                parseFloat(prevMarkets[id].reserves)) *
-              prevMarkets[id].underlyingPriceUSD;
-
-            const prevBorrowRate =
-              prevMarkets[id].borrowRate / ethBlocksPerYear;
-            const prevBorrowApy =
-              (Math.pow(prevBorrowRate * blocksPerDay + 1, daysPerYear) - 1) *
-              100;
-            const prevTotalBorrowUsd =
-              prevMarkets[id].totalBorrows * prevMarkets[id].underlyingPriceUSD;
-
-            markets[id].supplyApyDiff = markets[id].supplyApy - prevSupplyApy;
-            markets[id].totalSupplyUsdDiff =
-              markets[id].totalSupplyUsd !== 0
-                ? getPercentageChange(
-                    markets[id].totalSupplyUsd,
-                    prevTotalSupplyUsd
-                  )
-                : 0;
-
-            markets[id].borrowApyDiff = markets[id].borrowApy - prevBorrowApy;
-            markets[id].totalBorrowUsdDiff =
-              markets[id].totalBorrowUsd !== 0
-                ? getPercentageChange(
-                    markets[id].totalBorrowUsd,
-                    prevTotalBorrowUsd
-                  )
-                : 0;
-
-            prevBorrowUsd += prevTotalBorrowUsd;
-            prevSupplyUsd += prevTotalSupplyUsd;
-
-            // console.log('prevMarkets',{prevSupplyApy,prevTotalSupplyUsd,prevBorrowApy,prevTotalBorrowUsd})
-            // console.log('markets',markets[id])
-          } else {
-            markets[id].supplyApyDiff = 0;
-            markets[id].totalSupplyUsdDiff = 0;
-            markets[id].borrowApyDiff = 0;
-            markets[id].totalBorrowUsdDiff = 0;
-          }
         }
       );
-
-      total.supply.usdDiff = getPercentageChange(
-        total.supply.usd,
-        prevSupplyUsd
-      );
-      total.borrow.usdDiff = getPercentageChange(
-        total.borrow.usd,
-        prevBorrowUsd
-      );
-
-      total.borrow.count = Object.keys(uniqueBorrowers).length;
-      total.supply.count = Object.keys(uniqueSuppliers).length;
 
       total.supply.topMarkets = Object.keys(markets).sort((a, b) => {
         return markets[b].totalSupplyUsd - markets[a].totalSupplyUsd;
@@ -350,39 +186,6 @@ export function useMarketsInfo() {
       });
       total.borrow.topMarkets.length = 3;
 
-      // volumes
-      const supplyVolume = response.supplyVolume
-        .map((supply) =>
-          typeof usdPricesByCToken[supply.cTokenSymbol] !== "undefined"
-            ? supply.underlyingAmount * usdPricesByCToken[supply.cTokenSymbol]
-            : 0
-        )
-        .reduce((previous: number, current: number) => previous + current, 0);
-      const redeemVolume = response.redeemVolume
-        .map((redeem) =>
-          typeof usdPricesByCToken[redeem.cTokenSymbol] !== "undefined"
-            ? redeem.underlyingAmount * usdPricesByCToken[redeem.cTokenSymbol]
-            : 0
-        )
-        .reduce((previous: number, current: number) => previous + current, 0);
-      const borrowVolume = response.borrowVolume
-        .map((borrow) =>
-          typeof usdPricesByToken[borrow.underlyingSymbol] !== "undefined"
-            ? borrow.amount * usdPricesByToken[borrow.underlyingSymbol]
-            : 0
-        )
-        .reduce((previous: number, current: number) => previous + current, 0);
-      const repayVolume = response.repayVolume
-        .map((repay) =>
-          typeof usdPricesByToken[repay.underlyingSymbol] !== "undefined"
-            ? repay.amount * usdPricesByToken[repay.underlyingSymbol]
-            : 0
-        )
-        .reduce((previous: number, current: number) => previous + current, 0);
-
-      total.supply.volume = supplyVolume - redeemVolume;
-      total.borrow.volume = borrowVolume - repayVolume;
-
       setMarketsInfo({
         markets: markets,
         total: total,
@@ -390,7 +193,53 @@ export function useMarketsInfo() {
     };
 
     getMarketsInfo();
-  }, [getGlpApy, networkData, signer, tokenPairs, pollingKey, getGmxApy]);
+  }, [networkData, signer, tokenPairs, pollingKey]);
+
+  async function getTokenMarketInfo(address: string) {
+    let contract = new ethers.Contract(
+      address,
+      sampleCtokenAbi,
+      signer
+    );
+
+    console.log(address);
+    // let chainLinkContract = new ethers.Contract(
+    //   '0x639fe6ab55c921f74e7fac1ee960c0b6293ba612',
+    //   chainlinkAbi,
+    //   signer
+    // );
+
+    // let ethPriceInUsd: number = await chainLinkContract.latestAnswer();
+    // ethPriceInUsd /= Math.pow(10, 8);
+    let ethPriceInUsd: number = 1535;
+    let ethProxyContract = new ethers.Contract(
+      // "0x5947189d2D7765e4f629C803581FfD06bc57dE9B",
+      "0x7600EddCeB7C546789aE0a5fB1Dd4B4f390001EF", //testnet
+      samplePriceOracleAbi,
+      signer
+    );
+
+    let tokenSymbol = await contract.symbol();
+    let underlyingDecimals: number[];
+    switch (tokenSymbol) {
+      case "lWBTC": underlyingDecimals = [8, 10]; break;
+      case "lUSDT": underlyingDecimals = [6, 12]; break;
+      case "lUSDC": underlyingDecimals = [6, 12]; break;
+      default: underlyingDecimals = [18, 0]; break;
+    }
+    let cTokenMarket = {
+      symbol: tokenSymbol,
+      underlyingSymbol: tokenSymbol.substring(1, tokenSymbol.length),
+      borrowRate: formatBigNumber(await contract.borrowRatePerBlock(), 18),
+      cash: formatBigNumber(await contract.getCash(), underlyingDecimals[0]),
+      reserves: formatBigNumber(await contract.totalReserves(), underlyingDecimals[0]),
+      supplyRate: formatBigNumber(await contract.supplyRatePerBlock(), 18),
+      id: address,
+      totalBorrows: formatBigNumber(await contract.totalBorrows(), underlyingDecimals[0]),
+      underlyingPriceUSD: formatBigNumber(await ethProxyContract.getUnderlyingPrice(address), 18 + underlyingDecimals[1]) * ethPriceInUsd
+    };
+    return cTokenMarket;
+  }
 
   return marketsInfo;
 }

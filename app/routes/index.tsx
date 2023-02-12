@@ -31,6 +31,6 @@ export default function Home() {
 }
 
 export const meta: MetaFunction = () => ({
-  title: "Tender.fi - Dashboard",
-  property: [{ "og:title": "Tender.fi - Dashboard" }],
+  title: "Lodestar - Dashboard",
+  property: [{ "og:title": "Lodestar - Dashboard" }],
 });

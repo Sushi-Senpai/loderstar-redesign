@@ -10,7 +10,7 @@ function TokenTopDetails({ marketInfo }: { marketInfo: object | boolean }) {
     open: false,
     coins: [{}],
   });
-  const isBorrowable = marketInfo.tokenSymbol !== "GLP";
+  const isBorrowable = true;
   const borrowApy = isBorrowable ? marketInfo.borrowApy * -1 : 0;
 
   const supplyApy = marketInfo.supplyApy;

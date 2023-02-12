@@ -51,16 +51,16 @@ const TokenGettingStarted = ({ market }: Props) => {
         <div className="flex p-[30px]">
           <button
             onClick={() => handlerClickChangeTab("supply")}
-            className="leading-[22.1px] font-bold font-space text-[13px] mr-[10px] lg:mr-[20px] bg-[#14F195] text-black
-      rounded-[6px] lg:w-[144px] lg:h-[44px] min-w-[100px] h-[40px] border-[#14F195] border-[1px] hover:bg-[#14f195ce]"
+            className="leading-[22.1px] font-bold font-space text-[13px] mr-[10px] lg:mr-[20px] bg-[#E5D540] text-black
+      rounded-[6px] lg:w-[144px] lg:h-[44px] min-w-[100px] h-[40px] border-[#E5D540] border-[1px] hover:bg-[#E5D540ce]"
           >
             SUPPLY
           </button>
           {market.isBorrowable && (
             <button
               onClick={() => handlerClickChangeTab("borrow")}
-              className="leading-[22.1px] font-bold font-space text-[13px] mr-[12px] lg:mr-[20px] bg-[#00E0FF] text-black
-            rounded-[6px] lg:w-[144px] lg:h-[44px] min-w-[100px] h-[40px] border-[#00E0FF] border-[1px] hover:bg-[#00e1ffd0]"
+              className="leading-[22.1px] font-bold font-space text-[13px] mr-[12px] lg:mr-[20px] bg-[#E69E40] text-black
+            rounded-[6px] lg:w-[144px] lg:h-[44px] min-w-[100px] h-[40px] border-[#E69E40] border-[1px] hover:bg-[#00e1ffd0]"
             >
               BORROW
             </button>

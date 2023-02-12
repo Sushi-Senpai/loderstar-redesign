@@ -38,8 +38,8 @@ export default function TokenPage() {
 }
 
 export const meta: MetaFunction = (data) => ({
-  title: `Tender.fi - Token ${data.params.tokenId?.toUpperCase()}`,
+  title: `lodestarfinance.io - Token ${data.params.tokenId?.toUpperCase()}`,
   property: [
-    { "og:title": `Tender.fi - Token ${data.params.tokenId?.toUpperCase()}` },
+    { "og:title": `lodestarfinance.io - Token ${data.params.tokenId?.toUpperCase()}` },
   ],
 });

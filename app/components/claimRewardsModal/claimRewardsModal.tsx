@@ -30,7 +30,7 @@ const ClaimRewardsModal = ({ data, handlerClose }: IProps) => {
       }}
       closeTimeoutMS={200}
     >
-      <div className="relative border-[#B5CFCC2B] bg-[#0D0D0D]">
+      <div className="relative border-[#B5CFCC2B] bg-[#141829]">
         <div className="pt-[21px] pb-[21px] md:pt-[23px] md:pb-[23px] text-center text-lg md:text-xl font-bold leading-[26px] bg-[#151515] font-space uppercase border-b-[1px] border-[#282C2B] custom__line relative">
           Claim Rewards
           <img
@@ -82,7 +82,7 @@ const ClaimRewardsModal = ({ data, handlerClose }: IProps) => {
               <div className="btn-custom-border rounded-[6px] mt-[20px] md:mt-0">
                 <button
                   onClick={reward.onClickClaim}
-                  className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#14F195] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] uppercase hover:bg-[#1e573fb5]"
+                  className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#E5D540] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] uppercase hover:bg-[#1e573fb5]"
                 >
                   Claim
                 </button>
@@ -108,7 +108,7 @@ const ClaimRewardsModal = ({ data, handlerClose }: IProps) => {
         }}
         closeTimeoutMS={200}
       >
-        <div className="relative border-[#B5CFCC2B] bg-[#0D0D0D]">
+        <div className="relative border-[#B5CFCC2B] bg-[#141829]">
           <div
             key={1}
             className="absolute right-[16px] sm:right-[20px] top-[26px]"
@@ -226,7 +226,7 @@ const ClaimRewardsModal = ({ data, handlerClose }: IProps) => {
                 </div>
               </div>
             </div>
-            <button className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#14F195] text-xs leading-5  md:text-sm md:leading-[22px] font-medium rounded-[6px] bg-[#0e3625] relative z-[2] uppercase hover:bg-[#1e573fb5]">
+            <button className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#E5D540] text-xs leading-5  md:text-sm md:leading-[22px] font-medium rounded-[6px] bg-[#0e3625] relative z-[2] uppercase hover:bg-[#1e573fb5]">
               Claim
             </button>
           </div>
@@ -330,7 +330,7 @@ const ClaimRewardsModal = ({ data, handlerClose }: IProps) => {
                 </div>
               </div>
             </div>
-            <button className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#14F195] text-xs leading-5  md:text-sm md:leading-[22px] font-medium rounded-[6px] bg-[#0e3625] relative z-[2] uppercase hover:bg-[#1e573fb5]">
+            <button className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#E5D540] text-xs leading-5  md:text-sm md:leading-[22px] font-medium rounded-[6px] bg-[#0e3625] relative z-[2] uppercase hover:bg-[#1e573fb5]">
               Claim
             </button>
           </div>

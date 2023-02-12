@@ -4,7 +4,7 @@ export default {
   blockExplorerName: "Metis Andromeda Explorer",
   blockExplorerUrl: "https://andromeda-explorer.metis.io/tx",
   secondsPerBlock: 15, // 10.9
-  graphUrl: 'https://graph.tender.fi/',
+  graphUrl: 'https://graph.lodestarfinance.io/',
   Contracts: {
     Comptroller: "0x798752C2cd661b3eA4B7A5b45041fA95AcE3fc02",
     PriceOracle: "0x628cf7F1e248a86913Dc2eBa4599300243eeaf5F",

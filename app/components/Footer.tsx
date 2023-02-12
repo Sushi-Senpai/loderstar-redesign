@@ -7,7 +7,7 @@ export default function Footer() {
   let links: Link[] = [
     {
       label: "Docs",
-      url: "https://docs.tender.fi",
+      url: "https://docs.lodestarfinance.io",
       ico: "/images/ico/list.svg",
     },
     {
@@ -18,21 +18,21 @@ export default function Footer() {
     {
       label: "Support",
       ico: "/images/ico/email.svg",
-      url: "mailto:support@tender.fi",
+      url: "mailto:dev@lodestarfinance.io",
     },
     {
       label: "Telegram",
-      url: "http://t.me/tenderFi",
+      url: "https://t.me/lodestarfinancearb",
       ico: "/images/ico/telegram.svg",
     },
     {
       label: "Twitter",
-      url: "https://twitter.com/tender_fi",
+      url: "https://twitter.com/LodestarFinance",
       ico: "/images/ico/twitter.svg",
     },
     {
       label: "Discord",
-      url: "https://discord.com/invite/TenderFi",
+      url: "https://t.co/2yYHcE44LZ",
       ico: "/images/ico/discord.svg",
     },
   ];
@@ -40,7 +40,7 @@ export default function Footer() {
     <footer className="border-t border-[#2B2B2B] w-full">
       <div className="h-[120px] md:h-[62px] c flex-col-reverse items-center md:flex-row justify-between w-full flex max-w-[1400px]">
         <div className="mb-[30px] md:mb-0 font-normal text-base text-[#818987]">
-          © {new Date().getFullYear()} Tender Finance
+          © {new Date().getFullYear()} Lodestar Finance
         </div>
         <div className="pt-[30px] flex gap-[20px] md:flex md:py-4 justify-center items-center">
           {links.map((item) => {

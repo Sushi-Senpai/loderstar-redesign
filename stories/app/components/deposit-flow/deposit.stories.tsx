@@ -36,7 +36,7 @@ let cToken: cTokenType = {
 };
 
 let token: Token = {
-  priceInUsd: 2,
+  priceInEth: 2,
   symbol: "TOK",
   icon: "/images/coin-icons/metis.svg",
   name: "token",

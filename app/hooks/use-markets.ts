@@ -17,6 +17,7 @@ import { providers as mcProviders } from "@0xsequence/multicall";
 import { formatUnits } from "ethers/lib/utils";
 import { useGlpApy } from "./use-glp-apy";
 import { useGmxApy } from "./use-gmx-apy";
+import chainlinkAbi from "~/config/chainlink-abi";
 
 // @todo maybe refactor (remove duplicate code from tender.ts, merge changes, etc.)
 export function useMarkets(
@@ -73,9 +74,9 @@ export function useMarkets(
         const exchangeRateCurrentPromise = cTokenContract.exchangeRateStored();
 
         // -> collateralFactorForToken
-        const comptrollerMarketsPromise = comptrollerContract.markets(
-          tp.cToken.address
-        );
+        // const comptrollerMarketsPromise = comptrollerContract.markets(
+        //   tp.cToken.address
+        // );
 
         // -> borrowCaps
         const borrowCapsPromise = comptrollerContract.borrowCaps(
@@ -107,7 +108,7 @@ export function useMarkets(
         const totalReservesPromise = cTokenContract.totalReserves();
 
         // -> isGLP flag
-        const isGLPPromise = cTokenContract.isGLP();
+        // const isGLPPromise = cTokenContract.isGLP();
 
         // getWalletBalance
         let walletBalancePromise;
@@ -125,7 +126,7 @@ export function useMarkets(
 
         // hasSufficientAllowance
         let allowancePromise;
-        const allowanceAddress = tp.token.sGLPAddress || tp.token.address;
+        const allowanceAddress = tp.token.address;
 
         if (allowanceAddress) {
           // workaround for native token
@@ -140,28 +141,28 @@ export function useMarkets(
           );
         }
 
-        const autocompoundPromise = cTokenContract.autocompound();
+        // const autocompoundPromise = cTokenContract.autocompound();
 
-        let performanceFeePromise;
-        let withdrawFeePromise;
+        // let performanceFeePromise;
+        // let withdrawFeePromise;
 
-        if (tp.token.cToken.isVault) {
-          performanceFeePromise = cTokenContract.performanceFee();
-          withdrawFeePromise = cTokenContract.withdrawFee();
-        } else {
-          performanceFeePromise = new Promise((resolve) => {
-            resolve(0);
-          });
-          withdrawFeePromise = new Promise((resolve) => {
-            resolve(0);
-          });
-        }
+        // if (tp.token.cToken.isVault) {
+        //   performanceFeePromise = cTokenContract.performanceFee();
+        //   withdrawFeePromise = cTokenContract.withdrawFee();
+        // } else {
+        //   performanceFeePromise = new Promise((resolve) => {
+        //     resolve(0);
+        //   });
+        //   withdrawFeePromise = new Promise((resolve) => {
+        //     resolve(0);
+        //   });
+        // }
 
         return {
           borrowBalance: borrowBalancePromise,
           balance: balancePromise,
           exchangeRateCurrent: exchangeRateCurrentPromise,
-          comptrollerMarkets: comptrollerMarketsPromise,
+          comptrollerMarkets: 1,
           cash: cashPromise,
           supplyRatePerBlock: supplyRatePerBlockPromise,
           borrowRatePerBlock: borrowRatePerBlockPromise,
@@ -170,10 +171,6 @@ export function useMarkets(
           tokenPair: tp,
           walletBalance: walletBalancePromise,
           allowance: allowancePromise,
-          autocompound: autocompoundPromise,
-          performanceFee: performanceFeePromise,
-          withdrawFee: withdrawFeePromise,
-          isGLP: isGLPPromise,
           borrowCaps: borrowCapsPromise,
           supplyCaps: supplyCapsPromise,
         };
@@ -200,19 +197,14 @@ export function useMarkets(
           allowance: tokenPromise.allowance
             ? await tokenPromise.allowance
             : MINIMUM_REQUIRED_APPROVAL_BALANCE,
-          autocompound: await tokenPromise.autocompound,
-          performanceFee: await tokenPromise.performanceFee,
-          withdrawFee: await tokenPromise.withdrawFee,
-          isGLP: await tokenPromise.isGLP,
           borrowCaps: await tokenPromise.borrowCaps,
           supplyCaps: await tokenPromise.supplyCaps,
         });
       }
 
-      const liquidationIncentiveMantissa =
-        await liquidationIncentiveMantissaPromise;
+      const liquidationIncentiveMantissa = 1.052 * 100 - 100;
       const liquidationPenalty = liquidationIncentiveMantissa
-        ? (liquidationIncentiveMantissa / 1e18) * 100 - 100
+        ? liquidationIncentiveMantissa
         : 0;
 
       // getTotalBorrowedInUsd
@@ -222,7 +214,7 @@ export function useMarkets(
             formatBigNumber(
               token.borrowBalance,
               token.tokenPair.token.decimals
-            ) * token.tokenPair.token.priceInUsd
+            ) * token.tokenPair.token.priceInEth
           );
         })
         .reduce((acc, curr) => acc + curr, 0);
@@ -236,12 +228,10 @@ export function useMarkets(
             token.tokenPair.token.decimals + 18
           );
 
-          const collateralFactor = parseFloat(
-            formatUnits(token.comptrollerMarkets.collateralFactorMantissa, 18)
-          );
+          const collateralFactor = 1
 
           return (
-            suppliedAmount * token.tokenPair.token.priceInUsd * collateralFactor
+            suppliedAmount * (token.tokenPair.token.priceInEth) * collateralFactor
           );
         })
         .reduce((acc, curr) => acc + curr, 0);
@@ -257,8 +247,8 @@ export function useMarkets(
           tp.token.decimals
         );
 
-        const supplyBalanceInUsd = supplyBalance * tp.token.priceInUsd;
-        const borrowBalanceInUsd = borrowBalance * tp.token.priceInUsd;
+        const supplyBalanceInUsd = supplyBalance * tp.token.priceInEth;
+        const borrowBalanceInUsd = borrowBalance * tp.token.priceInEth;
 
         const maxBorrowLiquidity = parseFloat(
           utils.formatUnits(token.cash, tp.token.decimals)
@@ -299,12 +289,9 @@ export function useMarkets(
           token.tokenPair.token.decimals
         );
 
-        const liquidationThreshold =
-          (token.comptrollerMarkets.liquidationThresholdMantissa / 1e18) * 100;
+        const liquidationThreshold = 1
 
-        const collateralFactor = parseFloat(
-          formatUnits(token.comptrollerMarkets.collateralFactorMantissa, 18)
-        );
+        const collateralFactor = 1
 
         return {
           id: tp.token.symbol,
@@ -335,11 +322,8 @@ export function useMarkets(
           hasSufficientAllowance: token.allowance.gte(
             MINIMUM_REQUIRED_APPROVAL_BALANCE
           ),
-          autocompound: token.autocompound,
-          performanceFee: token.performanceFee,
-          withdrawFee: token.withdrawFee,
           // -> for now, isBorrowable is derived from isGLP this can change in future, update when it changes
-          isBorrowable: !token.isGLP,
+          isBorrowable: true,
           liquidationThreshold,
           liquidationPenalty,
           borrowCaps: token.borrowCaps.toString(),

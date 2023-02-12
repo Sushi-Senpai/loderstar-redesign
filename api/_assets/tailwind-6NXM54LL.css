@@ -556,9 +556,9 @@ body {
   background-color: rgb(8 8 8 / var(--tw-bg-opacity));
   background-repeat: no-repeat;
   --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
+  color: #0C0F19;
   background-image: url(/images/bg-top.svg);
-  background: #000;
+  background: #0C0F19;
 }
 
 .c {
@@ -1155,7 +1155,7 @@ body {
 }
 
 .border-b {
-  border-bottom-width: 1px;
+  border-bottom-width: 0px;
 }
 
 .border-b-4 {
@@ -1167,7 +1167,7 @@ body {
   border-color: rgb(43 43 43 / var(--tw-border-opacity));
 }
 
-.border-\[\#14f195\] {
+.border-\[\#E5D540\] {
   --tw-border-opacity: 1;
   border-color: rgb(20 241 149 / var(--tw-border-opacity));
 }
@@ -1185,14 +1185,13 @@ body {
   border-color: #B5CFCC2B;
 }
 
-.border-b-\[\#14F195\] {
+.border-b-\[\#E5D540\] {
   --tw-border-opacity: 1;
   border-bottom-color: rgb(20 241 149 / var(--tw-border-opacity));
 }
 
 .bg-black {
   --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
 .bg-\[\#162421\] {
@@ -1215,7 +1214,7 @@ body {
   background-color: rgb(24 29 27 / var(--tw-bg-opacity));
 }
 
-.bg-\[\#14F195\] {
+.bg-\[\#E5D540\] {
   --tw-bg-opacity: 1;
   background-color: rgb(20 241 149 / var(--tw-bg-opacity));
 }
@@ -1244,7 +1243,7 @@ body {
   background-color: transparent;
 }
 
-.bg-\[\#0D0D0D\] {
+.bg-\[\#141829\] {
   --tw-bg-opacity: 1;
   background-color: rgb(13 13 13 / var(--tw-bg-opacity));
 }
@@ -1636,7 +1635,7 @@ body {
 
 .text-white {
   --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
+  color: #0C0F19;
 }
 
 .text-\[\#121111\] {
@@ -1649,12 +1648,12 @@ body {
   color: rgb(129 137 135 / var(--tw-text-opacity));
 }
 
-.text-\[\#14F195\] {
+.text-\[\#E5D540\] {
   --tw-text-opacity: 1;
   color: rgb(20 241 149 / var(--tw-text-opacity));
 }
 
-.text-\[\#14f195\] {
+.text-\[\#E5D540\] {
   --tw-text-opacity: 1;
   color: rgb(20 241 149 / var(--tw-text-opacity));
 }
@@ -1671,7 +1670,7 @@ body {
 
 .text-black {
   --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
+  /* color: rgb(0 0 0 / var(--tw-text-opacity)); */
 }
 
 .text-brand-green {
@@ -1718,7 +1717,7 @@ body {
 
 .hover\:text-white:hover {
   --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
+  color: #0C0F19;
 }
 
 @media (min-width: 640px) {

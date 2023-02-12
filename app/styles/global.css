@@ -132,12 +132,12 @@ body.body__fixed {
 }
 
 .text-dark-green {
-  color: #14f195;
+  color: #E5D540;
 }
 
 .panel-custom {
   position: relative;
-  background: #0d0d0d;
+  background: #141829;
   border-radius: 15px;
 }
 
@@ -265,7 +265,7 @@ body.body__fixed {
   top: 0;
   width: 100%;
   height: 100%;
-  border-left-color: #14F195;
+  border-left-color: #E5D540;
   border-left-width: 1px;
   border-left-style: solid;
 }
@@ -289,14 +289,14 @@ body.body__fixed {
 .custom__scroll::-webkit-scrollbar-button {
   display: block;
   width: 7px;
-  background-color: #0d0d0d;
+  background-color: #141829;
   outline: none;
   height: 4px;
 }
 
 .custom__scroll::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background: #14F195;
+  background: #E5D540;
 }
 
 .custom__scroll::-webkit-scrollbar-track {
@@ -324,7 +324,7 @@ body.body__fixed {
 }
 
 .modal .ReactModal__Content--after-open {
-  background: #0d0d0d !important;
+  background: #141829 !important;
   border: 1px solid #b5cfcc2b !important;
   width: 85%;
   border-radius: 1rem !important;
@@ -522,7 +522,7 @@ body.body__fixed {
   position: relative;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
-  background: url("/images/top-img.png");
+  background: #141829;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -556,15 +556,12 @@ body.body__fixed {
   z-index: -1;
   margin: 0px;
   border-radius: inherit;
-  background: #000;
+  background: #0C0F19;
 }
 
 .top__custom__value {
   box-shadow: 0px 20px 20px rgba(0, 0, 0, 0.2);
-  background: radial-gradient(71% 71% at 72.75% 75%,
-      rgba(20, 242, 185, 0.12) 0%,
-      rgba(20, 242, 185, 0) 100%),
-    #111111;
+  background: rgb(20, 24, 41);
   border-radius: 50%;
 }
 
@@ -573,7 +570,7 @@ body.body__fixed {
 }
 
 .dropdown__wallet__custom:hover .arrow__custom path {
-  fill: #14f195;
+  fill: #E5D540;
 }
 
 
@@ -725,7 +722,7 @@ body.body__fixed {
 }
 
 .svg_animation_custom g>g path {
-  fill: #14F195;
+  fill: #E5D540;
 }
 
 .svg_animation_custom g>g:last-child path {

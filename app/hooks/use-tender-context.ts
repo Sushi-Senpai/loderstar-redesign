@@ -39,7 +39,6 @@ export function useTenderContext() {
     if (!signer || !chainId || !networkData) {
       return;
     }
-
     setTenderContext({
       tokenPairs,
       networkData,
@@ -48,7 +47,7 @@ export function useTenderContext() {
       updateTransaction,
       isWaitingToBeMined,
       setIsWaitingToBeMined,
-      blockNumber,
+      blockNumber
     });
   }, [
     signer,

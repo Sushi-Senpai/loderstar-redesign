@@ -233,7 +233,7 @@ const ChartBorrow = ({ data }: { data: IDataBorrowDot[] }) => {
                 isAnimationActive={false}
                 type="monotone"
                 dataKey="borrowAPY"
-                stroke="#00E0FF"
+                stroke="#E69E40"
                 strokeWidth={3}
                 dot={false}
                 activeDot={<CustomDot />}
@@ -286,7 +286,7 @@ const ChartBorrow = ({ data }: { data: IDataBorrowDot[] }) => {
                 {data.map((entry: IDataBorrowDot, index: number) => (
                   <Cell
                     key={index}
-                    fill={activeTooltip === index ? "#00E0FF" : "#282C2B"}
+                    fill={activeTooltip === index ? "#E69E40" : "#282C2B"}
                   />
                 ))}
               </Bar>

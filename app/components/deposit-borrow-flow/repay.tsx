@@ -174,7 +174,7 @@ export default function Repay({
               className="absolute right-[16px] sm:right-[22px] top-[24px] cursor-pointer group"
             >
               <path
-                className="group-hover:fill-[#00E0FF]"
+                className="group-hover:fill-[#E69E40]"
                 d="M22.0567 3.05669C22.4961 3.49614 22.4961 4.20864 22.0567 4.64809L14.148 12.5567L22.0567 20.4654C22.4961 20.9048 22.4961 21.6173 22.0567 22.0568C21.6172 22.4962 20.9047 22.4962 20.4653 22.0568L12.5566 14.1481L4.64799 22.0568C4.20854 22.4962 3.49605 22.4962 3.05659 22.0568C2.61714 21.6173 2.61714 20.9048 3.05659 20.4654L10.9652 12.5567L3.05659 4.64809C2.61714 4.20864 2.61714 3.49614 3.05659 3.05669C3.49605 2.61723 4.20854 2.61723 4.64799 3.05669L12.5566 10.9653L20.4653 3.05669C20.9047 2.61724 21.6172 2.61724 22.0567 3.05669Z"
                 fill="white"
               />
@@ -196,7 +196,7 @@ export default function Repay({
                 />
                 <div className="max-w-sm text-center mt-[29px] md:mt-[34px] font-normal font-nova text-white text-sm px-0 md:px-4 mb-[10px] md:mb-0">
                   To borrow or repay {market.tokenPair.token.symbol} on the
-                  Tender.fi protocol, you need to enable it first.
+                  lodestarfinance.io protocol, you need to enable it first.
                 </div>
               </div>
             ) : (
@@ -221,7 +221,7 @@ export default function Repay({
                     );
                   }}
                   maxValueLabel={market.tokenPair.token.symbol}
-                  color="#00E0FF"
+                  color="#E69E40"
                 />
               </div>
             )}
@@ -247,7 +247,7 @@ export default function Repay({
                 )
             )}
           </div>
-          <div className="py-[20px] px-[15px] md:p-[30px] bg-[#0D0D0D] md:bg-[#151515]">
+          <div className="py-[20px] px-[15px] md:p-[30px] bg-[#141829] md:bg-[#151515]">
             <div className="relative flex w-full sm:w-full items-center font-nova text-sm sm:text-base text-white justify-between mb-[10px]">
               <div
                 tabIndex={0}
@@ -330,7 +330,7 @@ export default function Repay({
                       setIsEnabling(false);
                     }
                   }}
-                  className="flex items-center justify-center h-[50px] md:h-[60px] text-black font-space font-bold text-base sm:text-lg rounded w-full bg-[#00E0FF] hover:bg-[#00e1ffd0]"
+                  className="flex items-center justify-center h-[50px] md:h-[60px] text-black font-space font-bold text-base sm:text-lg rounded w-full bg-[#E69E40] hover:bg-[#00e1ffd0]"
                 >
                   {isEnabling ? "ENABLING..." : "ENABLE"}
                 </button>
@@ -380,7 +380,7 @@ export default function Repay({
                       setIsRepaying(false);
                     }
                   }}
-                  className="flex items-center justify-center h-[50px] md:h-[60px] text-black font-space font-bold text-base sm:text-lg rounded w-full bg-[#00E0FF] hover:bg-[#00e1ffd0]"
+                  className="flex items-center justify-center h-[50px] md:h-[60px] text-black font-space font-bold text-base sm:text-lg rounded w-full bg-[#E69E40] hover:bg-[#00e1ffd0]"
                 >
                   {isRepaying ? "REPAYING ..." : "REPAY"}
                 </button>

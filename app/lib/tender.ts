@@ -16,6 +16,7 @@ import type {
   JsonRpcSigner,
 } from "@ethersproject/providers";
 import sampleCEtherAbi from "~/config/sample-CEther-abi";
+import chainlinkAbi from "~/config/chainlink-abi";
 
 // more info: https://github.com/ethereum/solidity/issues/533#issuecomment-218776352
 const NEGATIVE_UINT = BigNumber.from("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")
@@ -68,7 +69,7 @@ async function enable(
  */
 async function getWalletBalance(signer: Signer, token: Token): Promise<number> {
   // ETH is a special case
-  if (token.symbol === "ETH")  {
+  if (token.symbol === "ETH") {
     const balance = await signer.getBalance();
     const balanceInEth = formatEther(balance);
     return parseFloat(balanceInEth);
@@ -102,14 +103,14 @@ async function deposit(
   token: Token
 ): Promise<Txn> {
   let formattedValue;
-  
+
   if (token.symbol === "ETH") {
     let contract = new ethers.Contract(cToken.address, SampleCEtherAbi, signer);
     console.log("supply() w/ cEth");
     formattedValue = ethers.utils.parseEther(value);
     console.log(formattedValue.toString())
     console.log("input value:", value, "formattedValue:", formattedValue.toString());
-    return await contract.mint({value: formattedValue});
+    return await contract.mint({ value: formattedValue });
 
   } else {
     let contract = new ethers.Contract(cToken.address, SampleCTokenAbi, signer);
@@ -212,7 +213,7 @@ async function getCurrentlyBorrowing(
   );
   let address: string = await signer.getAddress();
   let balance: BigNumber = await contract.callStatic.borrowBalanceCurrent(address);
-  
+
   return formatBigNumber(balance, token.decimals);
 }
 
@@ -250,7 +251,7 @@ async function borrowLimitForTokenInUsd(
     tp
   );
 
-  let amount = suppliedAmount * tp.token.priceInUsd * collateralFactor;
+  let amount = suppliedAmount * tp.token.priceInEth * collateralFactor;
 
   return amount;
 }
@@ -318,9 +319,9 @@ async function projectBorrowLimit(
   // times its collateral factor (what % of that dollar amount you can borrow against).
   // `tokenAmount` might be a negative number and thus reduce the limit.
   let borrowLimitChangeInUsd: number =
-    tokenAmount * tp.token.priceInUsd * collateralFactor;
+    tokenAmount * tp.token.priceInEth * collateralFactor;
 
-    console.log("CF", collateralFactor, tp.token.symbol, "price", tp.token.priceInUsd)
+  console.log("CF", collateralFactor, tp.token.symbol, "price", tp.token.priceInEth)
   return currentBorrowLimitInUsd + borrowLimitChangeInUsd;
 }
 
@@ -378,14 +379,14 @@ async function repay(
 
       // adjust repay value with 0.35% to take into account the accrued interest (based on compound solution)
       repayValue = repayValue.add(
-          repayValue.mul(ethers.BigNumber.from(35)).div(ethers.BigNumber.from(10000))
+        repayValue.mul(ethers.BigNumber.from(35)).div(ethers.BigNumber.from(10000))
       );
 
-      return await maximillionContract.repayBehalf(address, {value: repayValue});
+      return await maximillionContract.repayBehalf(address, { value: repayValue });
     } else {
       repayValue = ethers.utils.parseEther(value);
       console.log("input value:", value, "repayValue:", repayValue.toString());
-      return await contract.repayBorrow({value: repayValue});
+      return await contract.repayBorrow({ value: repayValue });
     }
   }
 
@@ -410,14 +411,14 @@ async function borrow(
   token: Token
 ): Promise<Txn> {
   if (token.symbol === "ETH") {
-      console.log("borrow() with cEth");
+    console.log("borrow() with cEth");
 
-      const formattedValue = ethers.utils.parseEther(value);
-      console.log("input value:", value, "formattedValue:", formattedValue);
+    const formattedValue = ethers.utils.parseEther(value);
+    console.log("input value:", value, "formattedValue:", formattedValue);
 
-      let contract = new ethers.Contract(cToken.address, sampleCEtherAbi, signer);
-      return await contract.borrow(formattedValue);
-    }
+    let contract = new ethers.Contract(cToken.address, sampleCEtherAbi, signer);
+    return await contract.borrow(formattedValue);
+  }
   else {
 
     const formattedValue: BigNumber = ethers.utils.parseUnits(
@@ -465,7 +466,7 @@ async function hasSufficientAllowance(
   token: Token,
   cToken: cToken
 ): Promise<boolean> {
-  const contractAddress = token.sGLPAddress || token.address;
+  const contractAddress = token.address;
 
   if (!contractAddress) { // workaround for native token
     return true;
@@ -479,7 +480,7 @@ async function hasSufficientAllowance(
   return allowance.gte(MINIMUM_REQUIRED_APPROVAL_BALANCE);
 }
 
-async function getAssetPriceInUsd(
+async function getAssetPriceInEth(
   signer: Signer,
   priceOracleAddress: string,
   cToken: cToken,
@@ -491,11 +492,21 @@ async function getAssetPriceInUsd(
     signer
   );
 
+  // let chainLinkContract = new ethers.Contract(
+  //   '0x639fe6ab55c921f74e7fac1ee960c0b6293ba612',
+  //   chainlinkAbi,
+  //   signer
+  // );
+
+  // let ethPriceInUsd: number = await chainLinkContract.latestAnswer();
+  // ethPriceInUsd /= Math.pow(10, 8);
+
+  let ethPriceInUsd: number = 1535;
+
   let answer: BigNumber = await contract.getUnderlyingPrice(cToken.address);
 
   // based on calculation from compound subgraph
-  let priceInUsd = parseFloat(formatUnits(answer, 18 - token.decimals + 18));
-
+  let priceInUsd = parseFloat(formatUnits(answer, 18 - token.decimals + 18)) * ethPriceInUsd;
   return priceInUsd;
 }
 
@@ -511,7 +522,7 @@ async function getTotalSupplyBalanceInUsd(
         tp.token
       );
 
-      return suppliedAmount * tp.token.priceInUsd;
+      return suppliedAmount * tp.token.priceInEth;
     })
   );
 
@@ -530,7 +541,7 @@ async function getTotalBorrowedInUsd(
         tp.token
       );
 
-      return borrowedAmount * tp.token.priceInUsd;
+      return borrowedAmount * tp.token.priceInEth;
     })
   );
 
@@ -554,7 +565,7 @@ async function safeMaxBorrowAmountForToken(
   // (borrowed_amount + x*priceInUsd) / borrow_limit = 0.8
   // (borrowed_amount + x*priceInUsd) = 0.8 * borrow_limit
   // x = ((0.8 * borrow_limit) - borrowed_amount) / priceInUsd
-  let amount = ((maxBorrowLimitPercentage / 100) * borrowLimit - totalBorrowed) / tp.token.priceInUsd;
+  let amount = ((maxBorrowLimitPercentage / 100) * borrowLimit - totalBorrowed) / tp.token.priceInEth;
 
   return amount;
 }
@@ -566,7 +577,7 @@ async function getMaxBorrowAmount(
 ): Promise<number> {
   let borrowableAmountInUsd = borrowLimit - totalBorrowed;
 
-  return borrowableAmountInUsd / tp.token.priceInUsd;
+  return borrowableAmountInUsd / tp.token.priceInEth;
 }
 
 async function getMaxBorrowLiquidity(
@@ -600,7 +611,7 @@ export {
   getTotalBorrowed,
   hasSufficientAllowance,
   projectBorrowLimit,
-  getAssetPriceInUsd,
+  getAssetPriceInEth,
   getTotalBorrowedInUsd,
   safeMaxBorrowAmountForToken,
   getMaxBorrowAmount,

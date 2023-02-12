@@ -39,22 +39,22 @@ export default function DepositBorrowFlow({
   const tabs: { name: ActiveTab; color: string; show: boolean }[] = [
     {
       name: "supply",
-      color: "#14F195",
+      color: "#E5D540",
       show: true,
     },
     {
       name: "withdraw",
-      color: "#14F195",
+      color: "#E5D540",
       show: true,
     },
     {
       name: "borrow",
-      color: "#00E0FF",
+      color: "#E69E40",
       show: market.isBorrowable,
     },
     {
       name: "repay",
-      color: "#00E0FF",
+      color: "#E69E40",
       show: market.isBorrowable,
     },
   ];

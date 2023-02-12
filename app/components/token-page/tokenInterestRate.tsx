@@ -168,18 +168,18 @@ function TokenInterestRate({ data }: { data: any[] }) {
               <Line
                 type="monotone"
                 dataKey="ss"
-                stroke="#14F195"
+                stroke="#E5D540"
                 strokeWidth={2}
                 dot={false}
-                activeDot={<CustomDot borderColor="#0D0D0D" />}
+                activeDot={<CustomDot borderColor="#141829" />}
               />
               <Line
                 type="monotone"
                 dataKey="dd"
-                stroke="#00E0FF"
+                stroke="#E69E40"
                 strokeWidth={2}
                 dot={false}
-                activeDot={<CustomDot borderColor="#0D0D0D" />}
+                activeDot={<CustomDot borderColor="#141829" />}
               />
               <Tooltip content={<CustomTooltip />} cursor={<CustomLine />} />
             </LineChart>

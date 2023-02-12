@@ -25,6 +25,6 @@ export default function Markets() {
 }
 
 export const meta: MetaFunction = () => ({
-  title: "Tender.fi - Markets",
-  property: [{ "og:title": "Tender.fi - Markets" }],
+  title: "lodestarfinance.io - Markets",
+  property: [{ "og:title": "lodestarfinance.io - Markets" }],
 });

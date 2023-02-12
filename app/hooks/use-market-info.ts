@@ -4,6 +4,7 @@ import { hooks as Web3Hooks } from "~/connectors/meta-mask";
 import { useWeb3Signer } from "~/hooks/use-web3-signer";
 import { TenderContext } from "~/contexts/tender-context";
 import { useGlpApy } from "./use-glp-apy";
+import { ethers } from "ethers";
 import {
   calculateApy,
   getGlpAprPerBlock,
@@ -13,63 +14,10 @@ import { BigNumber } from "ethers";
 import { parseUnits } from "ethers/lib/utils";
 import { useInterval } from "~/hooks/use-interval";
 import { useGmxApy } from "./use-gmx-apy";
-
-const getLatestBlock = async function (graphUrl: string) {
-  const response = await request(
-    graphUrl,
-    gql`
-      {
-        _meta {
-          block {
-            number
-          }
-        }
-      }
-    `
-  );
-
-  return response?._meta?.block?.number ? response._meta.block.number : 0;
-};
-
-const getStatsQuery = function (
-  address: string,
-  blockNumber: any,
-  secondsPerBlock: number
-): string {
-  if (!blockNumber) {
-    return "";
-  }
-
-  const blocksPerDay = Math.round((60 * 60 * 24) / secondsPerBlock);
-  const numOfPeriods = 60;
-  let query = "";
-
-  for (let i = 0; i < numOfPeriods; i++) {
-    const block = blockNumber - blocksPerDay * i;
-    query += gql`
-            b${block}:markets (
-                block:{number: ${block}}
-                where: {id: "${address}"}
-            ) {
-                supplyRate
-                borrowRate
-                totalBorrows
-                cash
-                reserves
-                underlyingPriceUSD
-                totalSupply
-                aum0
-                aum1
-                feeGmxSupply
-                tokensPerInterval
-                nativeTokenPrice
-                performanceFee
-            }
-        `;
-  }
-
-  return query;
-};
+import sampleCtokenAbi from "~/config/sample-ctoken-abi";
+import { formatBigNumber } from "~/lib/tender"
+import chainlinkAbi from "~/config/chainlink-abi";
+import samplePriceOracleAbi from "~/config/sample-price-oracle-abi";
 
 export function useMarketInfo(tokenId: string | undefined) {
   const [marketInfo, setMarketInfo] = useState<{
@@ -87,11 +35,8 @@ export function useMarketInfo(tokenId: string | undefined) {
   const tokenPair = tokenPairs.find(
     (tp) => tp.token.symbol === String(tokenId)
   );
-  const getGlpApy = useGlpApy();
-  const getGmxApy = useGmxApy();
 
   useEffect(() => {
-    console.log("useMarketInfo called");
 
     if (!signer || !networkData || tokenPairs.length === 0) {
       return;
@@ -108,56 +53,51 @@ export function useMarketInfo(tokenId: string | undefined) {
 
       const token = tokenPair.token;
       const address = token.cToken.address.toLowerCase();
-      const underlyingPriceUSD = token.priceInUsd;
+      const underlyingPriceUSD = token.priceInEth;
 
-      const blockNumber = await getLatestBlock(graphUrl);
-
-      if (blockNumber === 0) {
-        return;
+      let response = {
+        markets: new Array<any>(),
+        accountCTokens: new Array<any>()
       }
 
-      const statsQuery = getStatsQuery(address, blockNumber, l2SecondsPerBlock);
+      response.markets.push(await getTokenMarketInfo(address));
 
-      if (statsQuery.length === 0) {
-        return;
-      }
-
-      const response = await request(
-        graphUrl,
-        gql`
-    {
-  markets(where: {id: "${address}"}) {
-    borrowRate
-    cash
-    collateralFactor
-    exchangeRate
-    interestRateModelAddress
-    name
-    reserves
-    supplyRate
-    symbol
-    id
-    totalBorrows
-    totalSupply
-    underlyingAddress
-    underlyingName
-    underlyingPrice
-    underlyingSymbol
-    accrualBlockNumber
-    blockTimestamp
-    borrowIndex
-    reserveFactor
-    underlyingPriceUSD
-    underlyingDecimals
-  },
-    accountCTokens (where: {enteredMarket: true, symbol: "${token?.cToken?.symbol}"}) {
-      cTokenBalance
-      storedBorrowBalance
-    },
-    ${statsQuery}
-}
-`
-      );
+      //       const response = await request(
+      //         graphUrl,
+      //         gql`
+      //     {
+      //   markets(where: {id: "${address}"}) {
+      //     borrowRate
+      //     cash
+      //     collateralFactor
+      //     exchangeRate
+      //     interestRateModelAddress
+      //     name
+      //     reserves
+      //     supplyRate
+      //     symbol
+      //     id
+      //     totalBorrows
+      //     totalSupply
+      //     underlyingAddress
+      //     underlyingName
+      //     underlyingPrice
+      //     underlyingSymbol
+      //     accrualBlockNumber
+      //     blockTimestamp
+      //     borrowIndex
+      //     reserveFactor
+      //     underlyingPriceUSD
+      //     underlyingDecimals
+      //   },
+      //     accountCTokens (where: {enteredMarket: true, symbol: "${token?.cToken?.symbol}"}) {
+      //       cTokenBalance
+      //       storedBorrowBalance
+      //     },
+      //     ${statsQuery}
+      // }
+      // `
+      //       );
 
       if (
         !response ||
@@ -188,24 +128,10 @@ export function useMarketInfo(tokenId: string | undefined) {
       const ethBlocksPerYear = 2102400; // subgraph uses 2102400
 
       const supplyRate = market.supplyRate / ethBlocksPerYear;
-      if (tokenPair.token.symbol === "GLP") {
-        const glpApy = await getGlpApy(signer, tokenPair);
-        market.supplyApy = glpApy;
-      } else if (tokenPair.token.symbol === "GMX") {
-        const gmxApy = await getGmxApy(
-          signer,
-          tokenPair,
-          networkData.Contracts.PriceOracle
-        );
-        const tokenSupplyApy =
-          (Math.pow(supplyRate * blocksPerDay + 1, daysPerYear) - 1) * 100;
-        market.supplyApy = gmxApy + tokenSupplyApy;
-      } else {
-        market.supplyApy =
-          (Math.pow(supplyRate * blocksPerDay + 1, daysPerYear) - 1) * 100;
-      }
+      market.supplyApy =
+        (Math.pow(supplyRate * blocksPerDay + 1, daysPerYear) - 1) * 100;
 
-      market.isBorrowable = tokenPair.token.symbol !== "GLP";
+      market.isBorrowable = true;
       const borrowRate = market.borrowRate / ethBlocksPerYear;
       market.borrowApy =
         (Math.pow(borrowRate * blocksPerDay + 1, daysPerYear) - 1) * 100;
@@ -217,104 +143,12 @@ export function useMarketInfo(tokenId: string | undefined) {
         market.underlyingPriceUSD;
       market.totalBorrowUSD = market.totalBorrows * market.underlyingPriceUSD;
 
-      delete response.markets;
-      delete response.accountCTokens;
-
-      const historicalData = {};
-      Object.keys(response)
-        .map((key) => parseInt(key.substring(1)))
-        .sort((a, b) => a - b)
-        .forEach((key) => {
-          // @ts-ignore
-          historicalData[key] =
-            response[`b${key}`].length > 0
-              ? response[`b${key}`]
-              : [
-                  {
-                    supplyRate: 0,
-                    borrowRate: 0,
-                    totalBorrows: 0,
-                    cash: 0,
-                    reserves: 0,
-                    underlyingPriceUSD: 0,
-                  },
-                ];
-          if (
-            tokenPair.token.symbol === "GLP" &&
-            response[`b${key}`].length > 0
-          ) {
-            const ETHEREUM_SECONDS_PER_BLOCK = 12.05; // ethereum blocktime as blocktime is calulated in L1 blocktime
-            const {
-              aum0,
-              aum1,
-              tokensPerInterval,
-              nativeTokenPrice,
-              totalSupply,
-              performanceFee,
-              ...rest
-            } = response[`b${key}`][0];
-
-            const glpAprPerBlock = getGlpAprPerBlock(
-              [BigNumber.from(aum0), BigNumber.from(aum1)],
-              parseUnits(totalSupply, 8),
-              BigNumber.from(tokensPerInterval),
-              BigNumber.from(nativeTokenPrice),
-              BigNumber.from(performanceFee),
-              ETHEREUM_SECONDS_PER_BLOCK
-            );
-
-            // @ts-ignore
-            historicalData[key] = [
-              {
-                ...rest,
-                supplyRate: calculateApy(
-                  glpAprPerBlock,
-                  ETHEREUM_SECONDS_PER_BLOCK
-                ),
-              },
-            ];
-          }
-
-          if (
-            tokenPair.token.symbol === "GMX" &&
-            response[`b${key}`].length > 0
-          ) {
-            const ETHEREUM_SECONDS_PER_BLOCK = 12.05; // ethereum blocktime as blocktime is calulated in L1 blocktime
-            const {
-              feeGmxSupply,
-              tokensPerInterval,
-              nativeTokenPrice,
-              totalSupply,
-              performanceFee,
-              supplyRate,
-              ...rest
-            } = response[`b${key}`][0];
-
-            const gmxAprPerBlock = getGmxAprPerBlock(
-              BigNumber.from(feeGmxSupply),
-              parseUnits(rest.underlyingPriceUSD, 18),
-              BigNumber.from(tokensPerInterval),
-              BigNumber.from(nativeTokenPrice),
-              BigNumber.from(performanceFee),
-              ETHEREUM_SECONDS_PER_BLOCK
-            );
-
-            // @ts-ignore
-            historicalData[key] = [
-              {
-                ...rest,
-                supplyRate: calculateApy(
-                  gmxAprPerBlock,
-                  ETHEREUM_SECONDS_PER_BLOCK
-                ),
-              },
-            ];
-          }
-        });
+      // delete response.markets;
+      // delete response.accountCTokens;
 
       setMarketInfo({
         market: market,
-        historicalData: historicalData,
+        historicalData: null,
       });
     };
 
@@ -325,11 +159,111 @@ export function useMarketInfo(tokenId: string | undefined) {
     signer,
     tokenPairs,
     tokenPair,
-    getGlpApy,
     currentTransaction,
     pollingKey,
-    getGmxApy,
   ]);
+
+  async function getTokenMarketInfo(address: string) {
+    // ***********************blockTimestamp
+    let contract = new ethers.Contract(
+      address,
+      sampleCtokenAbi,
+      signer
+    );
+
+    // let chainLinkContract = new ethers.Contract(
+    //   '0x639fe6ab55c921f74e7fac1ee960c0b6293ba612',
+    //   chainlinkAbi,
+    //   signer
+    // );
+
+    // let ethPriceInUsd: number = await chainLinkContract.latestAnswer();
+    // ethPriceInUsd /= Math.pow(10, 8);
+    let ethPriceInUsd: number = 1535;
+
+    let ethProxyContract = new ethers.Contract(
+      // "0x5947189d2D7765e4f629C803581FfD06bc57dE9B",
+      "0x7600EddCeB7C546789aE0a5fB1Dd4B4f390001EF", //testnet
+      samplePriceOracleAbi,
+      signer
+    );
+
+    let tokenSymbol = await contract.symbol();
+    let tokenName = await contract.name()
+    let underlyingDecimals: number[];
+    let collateralFactor = 0;
+
+    switch (tokenSymbol) {
+      case "lWBTC": underlyingDecimals = [8, 10]; break;
+      case "lUSDT": underlyingDecimals = [6, 12]; break;
+      case "lUSDC": underlyingDecimals = [6, 12]; break;
+      default: underlyingDecimals = [18, 0]; break;
+    }
+
+    switch (tokenSymbol) {
+      case "lWBTC": collateralFactor = .75; break;
+      case "lUSDT": collateralFactor = .7; break;
+      case "lUSDC": collateralFactor = .85; break;
+      case "lFRAX": collateralFactor = .75; break;
+      case "lDAI": collateralFactor = .75; break;
+      case "lETH": collateralFactor = .8; break;
+      case "lMAGIC": collateralFactor = .15; break;
+      case "lMIM": collateralFactor = .6; break;
+      case "lDPX": collateralFactor = .15; break;
+      case "lplvGLP": collateralFactor = .8; break;
+      default: collateralFactor = 0; break;
+    }
+    let cTokenMarket = {
+      borrowRate: formatBigNumber(await contract.borrowRatePerBlock(), 18),
+      cash: formatBigNumber(await contract.getCash(), underlyingDecimals[0]),
+      collateralFactor: collateralFactor,
+      exchangeRate: formatBigNumber(await contract.exchangeRateStored(), (10 + underlyingDecimals[0])),
+      interestRateModelAddress: await contract.interestRateModel(),
+      name: tokenName,
+      reserves: formatBigNumber(await contract.totalReserves(), underlyingDecimals[0]),
+      supplyRate: formatBigNumber(await contract.supplyRatePerBlock(), 18),
+      symbol: tokenSymbol,
+      id: address,
+      totalBorrows: formatBigNumber(await contract.totalBorrows(), underlyingDecimals[0]),
+      totalSupply: formatBigNumber(await contract.totalSupply(), underlyingDecimals[0]),
+      underlyingAddress: tokenSymbol === 'lETH' ? '' : await contract.underlying(), //hard code for ETH
+      underlyingName: tokenName.substring(9, tokenName.length), //hard code for ETH
+      underlyingPrice: formatBigNumber(await ethProxyContract.getUnderlyingPrice(address), 18 + underlyingDecimals[1]),
+      underlyingSymbol: tokenSymbol.substring(1, tokenSymbol.length),
+      accrualBlockNumber: await contract.accrualBlockNumber(),
+      borrowIndex: formatBigNumber(await contract.borrowIndex(), 18),
+      reserveFactor: formatBigNumber(await contract.reserveFactorMantissa(), 18) * 100,
+      underlyingPriceUSD: formatBigNumber(await ethProxyContract.getUnderlyingPrice(address), 18 + underlyingDecimals[1]) * ethPriceInUsd,
+      underlyingDecimals: await contract.decimals()
+    };
+
+    cTokenMarket.totalSupply =
+      cTokenMarket.cash +
+      cTokenMarket.totalBorrows -
+      cTokenMarket.reserves;
+    // console.log("======================================'");
+    // console.log("borrowRate: " + cTokenMarket.borrowRate);
+    // console.log("cash: " + cTokenMarket.cash);
+    // console.log("collateralFactor: " + cTokenMarket.collateralFactor);
+    // console.log("exchangeRate: " + cTokenMarket.exchangeRate);
+    // console.log("interestRateModelAddress: " + cTokenMarket.interestRateModelAddress);
+    // console.log("name: " + cTokenMarket.name);
+    // console.log("supplyRate: " + cTokenMarket.supplyRate);
+    // console.log("symbol: " + cTokenMarket.symbol);
+    // console.log("id: " + cTokenMarket.id);
+    // console.log("totalBorrows: " + cTokenMarket.totalBorrows);
+    // console.log("totalSupply: " + cTokenMarket.totalSupply);
+    // console.log("underlyingAddress: " + cTokenMarket.underlyingAddress);
+    // console.log("underlyingName: " + cTokenMarket.underlyingName);
+    // console.log("underlyingPrice: " + cTokenMarket.underlyingPrice);
+    // console.log("underlyingSymbol: " + cTokenMarket.underlyingSymbol);
+    // console.log("accrualBlockNumber: " + cTokenMarket.accrualBlockNumber);
+    // console.log("borrowIndex: " + cTokenMarket.borrowIndex);
+    // console.log("reserveFactor: " + cTokenMarket.reserveFactor);
+    // console.log("underlyingPriceUSD: " + cTokenMarket.underlyingPriceUSD);
+    // console.log("underlyingDecimals: " + cTokenMarket.underlyingDecimals);
+    return cTokenMarket;
+  }
 
   return marketInfo;
 }

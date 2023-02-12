@@ -85,7 +85,7 @@ export default function Display({
           />
           <div className="flex flex-col items-center justify-center w-[260px] mr-[0] md:mr-[50px] lg:mr-[116px] ">
             <div className="w-full md:max-w-[491px] flex flex-col justify-center items-center mb-[32px] md:mb-[40px]">
-              <div className="text-[#00E0FF] font-nova font-semibold text-sm mb-[8px] md:mb-[9px]">
+              <div className="text-[#E69E40] font-nova font-semibold text-sm mb-[8px] md:mb-[9px]">
                 Total Borrow
               </div>
               <div className="text-2xl font-space md:text-[26px] font-normal">
@@ -98,7 +98,7 @@ export default function Display({
               </div>
             </div>
             <div className="w-full mt-[0px] md:mt-[23px] text-right flex flex-col justify-center items-center">
-              <div className="text-[#00E0FF] font-nova font-semibold text-sm mb-[8px] md:mb-[9px]">
+              <div className="text-[#E69E40] font-nova font-semibold text-sm mb-[8px] md:mb-[9px]">
                 Your Borrow
               </div>
               <div className="text-2xl font-space md:text-[26px] font-normal">
@@ -178,11 +178,11 @@ export default function Display({
       </div>
 
       <div className="flex items-center">
-        <div className="h-[5px] bg-[#1BD6CF] w-[16px] md:h-[4px] absolute bottom-0 left-0 zIndex-1"></div>
+        <div className="h-[5px] bg-[#E5D540] w-[16px] md:h-[4px] absolute bottom-0 left-0 zIndex-1"></div>
         <div
           className="w-0 h-full bg-green-300 h-[5px] md:h-[4px] absolute bottom-0 left-[16px] zIndex-1 flex justify-end"
           style={{
-            background: "linear-gradient(270deg, #1BD6CF 0%, #00E5AF 100%)",
+            background: "linear-gradient(270deg, #E5D540 0%, #00E5AF 100%)",
             width: `calc(${percentUsed}% - 16px)`,
             transition: "width 1s ease-out",
           }}

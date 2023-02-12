@@ -19,10 +19,10 @@ const Token = ({ id }: { id: string | undefined }) => {
   const marketInfo = useMarketInfo(id);
   const interestRateModel = useInterestRateModel(id);
 
-  const utilizationRate =
-    interestRateModel.length > 0
-      ? interestRateModel.find((rate) => rate.isCurrent)
-      : {};
+  // const utilizationRate =
+  //   interestRateModel.length > 0
+  //     ? interestRateModel.find((rate) => rate.isCurrent)
+  //     : {};
 
   return (
     <>
@@ -34,7 +34,7 @@ const Token = ({ id }: { id: string | undefined }) => {
         <TokenMarketDetails
           id={id}
           marketInfo={marketInfo.market}
-          utilizationRate={utilizationRate}
+          utilizationRate={0}
         />
         <div className="order-1 lg:order-2 w-full">
           <TokenGettingStarted market={token} />

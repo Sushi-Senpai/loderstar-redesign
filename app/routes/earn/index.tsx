@@ -16,6 +16,6 @@ export default function Earn() {
 }
 
 export const meta: MetaFunction = () => ({
-  title: "Tender.fi - Earn",
-  property: [{ "og:title": "Tender.fi - Earn" }],
+  title: "lodestarfinance.io - Earn",
+  property: [{ "og:title": "lodestarfinance.io - Earn" }],
 });

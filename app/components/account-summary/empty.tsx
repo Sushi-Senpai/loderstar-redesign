@@ -53,13 +53,13 @@ export default function AccountSummaryEmpty({ loading }: { loading: boolean }) {
           />
           <div className="flex flex-col items-center justify-center w-[260px] mr-[0] md:mr-[50px] lg:mr-[116px] ">
             <div className="w-full md:max-w-[491px] flex flex-col justify-center items-center mb-[32px] md:mb-[40px]">
-              <div className="text-[#00E0FF] font-nova font-semibold text-sm mb-[8px] md:mb-[9px]">
+              <div className="text-[#E69E40] font-nova font-semibold text-sm mb-[8px] md:mb-[9px]">
                 Total Borrow
               </div>
               <div className="animate w-[180px] h-[32px] text-2xl font-space md:text-[26px] font-normal"></div>
             </div>
             <div className="w-full mt-[0px] md:mt-[23px] text-right flex flex-col justify-center items-center">
-              <div className="text-[#00E0FF] font-nova font-semibold text-sm mb-[8px] md:mb-[9px]">
+              <div className="text-[#E69E40] font-nova font-semibold text-sm mb-[8px] md:mb-[9px]">
                 Your Borrow
               </div>
               <div className="animate w-[180px] h-[32px] text-2xl font-space md:text-[26px] font-normal"></div>
@@ -89,7 +89,7 @@ export default function AccountSummaryEmpty({ loading }: { loading: boolean }) {
       <div
         className="w-full h-full bg-green-300 mr-2 h-[5px] md:h-[4px] absolute bottom-0 left-0 zIndex-1 flex justify-end"
         style={{
-          background: "linear-gradient(270deg, #1BD6CF 0%, #00E5AF 100%)",
+          background: "linear-gradient(270deg, #E5D540 0%, #00E5AF 100%)",
           width: 16,
           transition: "width 1s ease-out",
         }}

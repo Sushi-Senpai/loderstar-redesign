@@ -17,7 +17,7 @@ export const checkColorClass = (value: number | string) => {
     case valueNumber > 0:
       return "text-dark-green";
     case valueNumber < 0:
-      return "text-[#00E0FF]";
+      return "text-[#E69E40]";
     default:
       return "text-white";
   }
@@ -41,6 +41,8 @@ export default function TwoPanels() {
   const marketsWithSupply = tenderContextData.markets.filter(
     (token: Market) => token.supplyBalance && token.supplyBalanceInUsd > 0
   );
+
+  const ethPriceInUsd = tenderContextData.ethPriceInUsd;
 
   const marketsWithoutSupply = tenderContextData.markets.filter(
     (token: Market) => !token.supplyBalance || token.supplyBalanceInUsd <= 0
@@ -162,7 +164,7 @@ export default function TwoPanels() {
                           <div className="!flex items-center break-words bg-dark-green text-dark-green rounded-md text-[11px] md:text-xs text-center h-[20px] md:h-[22px] px-[5px] absolute top-[25px] md:top-[61px] left-[15px]">
                             <DisplayPrice
                               amount={token.marketData.marketSize?.toString()}
-                              baseFactor={token.tokenPair.token.priceInUsd.toString()}
+                              baseFactor={(token.tokenPair.token.priceInEth).toString()}
                               isCompact
                             />
                           </div>
@@ -389,7 +391,7 @@ export default function TwoPanels() {
                           <div className="!flex items-center break-words bg-dark-green text-dark-green rounded-md text-[11px] md:text-xs text-center h-[20px] md:h-[22px] px-[5px] absolute top-[25px] md:top-[61px] left-[15px]">
                             <DisplayPrice
                               amount={token.marketData.marketSize?.toString()}
-                              baseFactor={token.tokenPair.token.priceInUsd.toString()}
+                              baseFactor={(token.tokenPair.token.priceInEth).toString()}
                               isCompact
                             />
                           </div>
@@ -523,7 +525,7 @@ export default function TwoPanels() {
                             <DisplayPrice
                               amount={token.walletBalance}
                               decimals={token.tokenPair.token.decimals}
-                              baseFactor={token.tokenPair.token.priceInUsd.toString()}
+                              baseFactor={(token.tokenPair.token.priceInEth).toString()}
                               isCompact
                             />
                           </div>
@@ -623,7 +625,7 @@ export default function TwoPanels() {
                           <div className="!flex items-center break-words bg-dark-green text-dark-green rounded-md text-[11px] md:text-xs text-center h-[20px] md:h-[22px] px-[5px] absolute top-[25px] md:top-[61px] left-[15px]">
                             <DisplayPrice
                               amount={token.marketData?.totalBorrowed?.toString()}
-                              baseFactor={token.tokenPair.token.priceInUsd.toString()}
+                              baseFactor={(token.tokenPair.token.priceInEth).toString()}
                               isCompact
                             />
                           </div>
@@ -845,7 +847,7 @@ export default function TwoPanels() {
                           <div className="!flex items-center break-words bg-dark-green text-dark-green rounded-md text-[11px] md:text-xs text-center h-[20px] md:h-[22px] px-[5px] absolute top-[25px] md:top-[61px] left-[15px]">
                             <DisplayPrice
                               amount={token.marketData?.totalBorrowed?.toString()}
-                              baseFactor={token.tokenPair.token.priceInUsd.toString()}
+                              baseFactor={(token.tokenPair.token.priceInEth).toString()}
                               isCompact
                             />
                           </div>
@@ -973,7 +975,7 @@ export default function TwoPanels() {
                           <div className="!flex items-center break-words bg-dark-green text-dark-green rounded-md text-[11px] md:text-xs text-center h-[20px] md:h-[22px] px-[5px] absolute top-[25px] md:top-[61px] left-[15px]">
                             <DisplayPrice
                               amount={token.maxBorrowLiquidity.toString()}
-                              baseFactor={token.tokenPair.token.priceInUsd.toString()}
+                              baseFactor={(token.tokenPair.token.priceInEth).toString()}
                               isCompact
                             />
                           </div>

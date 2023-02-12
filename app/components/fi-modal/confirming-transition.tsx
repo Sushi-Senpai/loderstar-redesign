@@ -25,7 +25,7 @@ export default function ConfirmingTransaction({
         className="absolute right-[16px] sm:right-[22px] top-[24px] cursor-pointer group"
       >
         <path
-          className="group-hover:fill-[#14f195]"
+          className="group-hover:fill-[#E5D540]"
           d="M22.0567 3.05669C22.4961 3.49614 22.4961 4.20864 22.0567 4.64809L14.148 12.5567L22.0567 20.4654C22.4961 20.9048 22.4961 21.6173 22.0567 22.0568C21.6172 22.4962 20.9047 22.4962 20.4653 22.0568L12.5566 14.1481L4.64799 22.0568C4.20854 22.4962 3.49605 22.4962 3.05659 22.0568C2.61714 21.6173 2.61714 20.9048 3.05659 20.4654L10.9652 12.5567L3.05659 4.64809C2.61714 4.20864 2.61714 3.49614 3.05659 3.05669C3.49605 2.61723 4.20854 2.61723 4.64799 3.05669L12.5566 10.9653L20.4653 3.05669C20.9047 2.61724 21.6172 2.61724 22.0567 3.05669Z"
           fill="white"
         />
@@ -54,7 +54,7 @@ export default function ConfirmingTransaction({
         href={`${blockExplorerUrl}/tx/${txnHash}`}
         rel="noreferrer"
         target="_blank"
-        className="uppercase font-space font-bold text-base w-full max-w-[375px] flex justify-center items-center bg-[#14F195] text-[#000] rounded-[6px] h-[50px] md:h-[60px] hover:bg-[#14f195ce]"
+        className="uppercase font-space font-bold text-base w-full max-w-[375px] flex justify-center items-center bg-[#E5D540] text-[#000] rounded-[6px] h-[50px] md:h-[60px] hover:bg-[#E5D540ce]"
       >
         VIEW ON EXPLORER
       </a>

@@ -7,12 +7,12 @@ export interface cToken {
 }
 
 export interface Token extends TokenConfig {
-  priceInUsd: number;
-  sGLPAddress?: any;
-  glpAddress?: string;
-  glpManager?: string;
-  rewardTracker?: string;
-  vault?: string;
+  priceInEth: number;
+  // sGLPAddress?: any;
+  // glpAddress?: string;
+  // glpManager?: string;
+  // rewardTracker?: string;
+  // vault?: string;
   nativeToken?: string;
   floor?: string; // the min amount to transfer
 }
@@ -47,11 +47,12 @@ export interface NetworkData {
 }
 
 export enum NetworkName {
-  rinkeby = "rinkeby",
-  metisStartdust = "metisStartdust",
-  metisMainnet = "metisMainnet",
+  // rinkeby = "rinkeby",
+  // metisStartdust = "metisStartdust",
+  // metisMainnet = "metisMainnet",
   arbitrum = "arbitrum",
-  avalanche = "avalanche",
+  arbitrumGoerli = "arbitrumGoerli"
+  // avalanche = "avalanche",
 }
 
 export type Networks = {
@@ -97,9 +98,9 @@ export type Market = {
   comptrollerAddress: string;
   maxBorrowLiquidity: number;
   hasSufficientAllowance: boolean;
-  autocompound: boolean;
-  performanceFee: number;
-  withdrawFee: number;
+  // autocompound: boolean;
+  // performanceFee: number;
+  // withdrawFee: number;
   isBorrowable: boolean;
   liquidationThreshold: number;
   liquidationPenalty: number;

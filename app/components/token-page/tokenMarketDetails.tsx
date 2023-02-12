@@ -46,9 +46,9 @@ function TokenMarketDetails({
       ),
     },
     {
-      show: id !== "GLP" && id !== "GMX",
+      show: true,
       itemName: "Utilization",
-      itemData: utilizationRate?.aa ? `${utilizationRate.aa}%` : "0%",
+      itemData: ((marketInfo.totalBorrows / (marketInfo.cash + marketInfo.totalBorrows)) * 100).toFixed(2) + "%",
     },
     {
       show: true,
@@ -86,49 +86,49 @@ function TokenMarketDetails({
         />
       ),
     },
-    {
-      show: true,
-      itemName: "# of Suppliers",
-      itemData: marketInfo.totalSuppliersCount,
-    },
-    {
-      show: true,
-      itemName: "# of Borrowers",
-      itemData: marketInfo.totalBorrowersCount,
-    },
-    {
-      show: true,
-      itemName: "Supply Cap",
-      itemData:
-        token.supplyCaps === "0" ? (
-          "No limit"
-        ) : (
-          <DisplayPrice
-            amount={token.supplyCaps}
-            decimals={marketInfo.underlyingDecimals}
-            tokenSymbol={marketInfo.tokenSymbol}
-          />
-        ),
-    },
-    {
-      show: true,
-      itemName: "Borrow Cap",
-      itemData:
-        token.borrowCaps === "0" ? (
-          "No limit"
-        ) : (
-          <DisplayPrice
-            amount={token.borrowCaps}
-            decimals={marketInfo.underlyingDecimals}
-            tokenSymbol={marketInfo.tokenSymbol}
-          />
-        ),
-    },
-    { show: true, itemName: "Interest Paid/Day", itemData: "0" },
+    // {
+    //   show: true,
+    //   itemName: "# of Suppliers",
+    //   itemData: marketInfo.totalSuppliersCount,
+    // },
+    // {
+    //   show: true,
+    //   itemName: "# of Borrowers",
+    //   itemData: marketInfo.totalBorrowersCount,
+    // },
+    // {
+    //   show: true,
+    //   itemName: "Supply Cap",
+    //   itemData:
+    //     token.supplyCaps === "0" ? (
+    //       "No limit"
+    //     ) : (
+    //       <DisplayPrice
+    //         amount={token.supplyCaps}
+    //         decimals={marketInfo.underlyingDecimals}
+    //         tokenSymbol={marketInfo.tokenSymbol}
+    //       />
+    //     ),
+    // },
+    // {
+    //   show: true,
+    //   itemName: "Borrow Cap",
+    //   itemData:
+    //     token.borrowCaps === "0" ? (
+    //       "No limit"
+    //     ) : (
+    //       <DisplayPrice
+    //         amount={token.borrowCaps}
+    //         decimals={marketInfo.underlyingDecimals}
+    //         tokenSymbol={marketInfo.tokenSymbol}
+    //       />
+    //     ),
+    // },
+    // { show: true, itemName: "Interest Paid/Day", itemData: "0" },
     {
       show: true,
       itemName: "Reserves",
-      itemData: marketInfo.reserves + " " + marketInfo.tokenSymbol,
+      itemData: marketInfo.reserves.toFixed(2) + " " + marketInfo.tokenSymbol,
     },
     {
       show: true,
@@ -140,16 +140,16 @@ function TokenMarketDetails({
             0.75 worth of ETH in the principal currency for every 1
             ETH worth of collateral.`,
     },
-    {
-      show: true,
-      itemName: "Liquidation Threshold",
-      itemData: token.liquidationThreshold + "%",
-      tooltipText: `This represents the threshold at which a borrow position will be considered undercollateralized and subject to liquidation for each collateral. For example, if a collateral has a liquidation threshold of 80%, it means that the position will be liquidated when the debt value is worth 80% of the collateral value.`,
-    },
+    // {
+    //   show: true,
+    //   itemName: "Liquidation Threshold",
+    //   itemData: token.liquidationThreshold + "%",
+    //   tooltipText: `This represents the threshold at which a borrow position will be considered undercollateralized and subject to liquidation for each collateral. For example, if a collateral has a liquidation threshold of 80%, it means that the position will be liquidated when the debt value is worth 80% of the collateral value.`,
+    // },
     {
       show: true,
       itemName: "Liquidation Penalty",
-      itemData: token.liquidationPenalty + "%",
+      itemData: "5.2%",
       tooltipText: `When a liquidation occurs, liquidators repay up to 50% of the outstanding borrowed amount on behalf of the borrower. In return, they can buy the collateral at a discount and keep the difference (liquidation penalty) as a bonus.`,
     },
     {
@@ -164,9 +164,9 @@ function TokenMarketDetails({
             tabIndex={-1}
             className="line-solid cursor-pointer text-white"
             rel="noreferrer"
-            href="https://www.tender.fi/"
+            href="https://www.lodestarfinance.io/"
           >
-            Tender.fi
+            lodestarfinance.io
           </a>{" "}
           governance to promote ecosystem growth.
         </div>
@@ -178,7 +178,7 @@ function TokenMarketDetails({
       itemName: "Contract",
       itemData: (
         <a
-          className="flex group items-center justify-between text-white hover:text-[#14F195]"
+          className="flex group items-center justify-between text-white hover:text-[#E5D540]"
           href={contractUrl}
           target="_blank"
           rel="noreferrer"
@@ -192,7 +192,7 @@ function TokenMarketDetails({
             fill="none"
           >
             <path
-              className="fill-white group-hover:fill-[#14F195]"
+              className="fill-white group-hover:fill-[#E5D540]"
               fillRule="evenodd"
               clipRule="evenodd"
               d="M5.41602 0.166992H2.49935C1.21077 0.166992 0.166016 1.21174 0.166016 2.50033V9.50033C0.166016 10.7889 1.21077 11.8337 2.49935 11.8337H9.49935C10.7879 11.8337 11.8327 10.7889 11.8327 9.50033C11.8327 8.17558 11.8327 6.58366 11.8327 6.58366C11.8327 6.26166 11.5713 6.00033 11.2493 6.00033C10.9273 6.00033 10.666 6.26166 10.666 6.58366V9.50033C10.666 10.1443 10.1433 10.667 9.49935 10.667C7.55685 10.667 4.44127 10.667 2.49935 10.667C1.85477 10.667 1.33268 10.1443 1.33268 9.50033C1.33268 7.55783 1.33268 4.44224 1.33268 2.50033C1.33268 1.85574 1.85477 1.33366 2.49935 1.33366H5.41602C5.73802 1.33366 5.99935 1.07233 5.99935 0.750326C5.99935 0.428326 5.73802 0.166992 5.41602 0.166992ZM9.84118 1.33366H7.74935C7.42735 1.33366 7.16602 1.07233 7.16602 0.750326C7.16602 0.428326 7.42735 0.166992 7.74935 0.166992H11.2493C11.5713 0.166992 11.8327 0.428326 11.8327 0.750326V4.25033C11.8327 4.57233 11.5713 4.83366 11.2493 4.83366C10.9273 4.83366 10.666 4.57233 10.666 4.25033V2.15849L6.41177 6.41274C6.18427 6.64024 5.81443 6.64024 5.58693 6.41274C5.35885 6.18524 5.35885 5.81541 5.58693 5.58791L9.84118 1.33366Z"
@@ -204,7 +204,7 @@ function TokenMarketDetails({
     {
       show: true,
       itemName: marketInfo.cTokenSymbol + " Minted",
-      itemData: <DisplayPrice amount={marketInfo.totalSupply} />,
+      itemData: <DisplayPrice amount={(marketInfo.totalSupply/marketInfo.exchangeRate).toString()} />,
     },
     {
       show: true,
@@ -283,12 +283,12 @@ function TokenMarketDetails({
                             alt="..."
                           />
                         </button>
-                        <p
+                        {/* <p
                           role={"status"}
                           className="text-[#818987] text-sm leading-5 md:text-xs text-left md:leading-[17px] font-nova"
                         >
                           {item.tooltipText}
-                        </p>
+                        </p> */}
                       </div>
                     </div>
                     <div className="custom__arrow__tooltip relative top-[-6px] left-[20px] w-3 h-3 rotate-45 bg-[#181D1B]"></div>

@@ -10,7 +10,7 @@ export default function EmptyEarnContent() {
           Please read the{" "}
           <a
             className="line-solid cursor-pointer text-white"
-            href="https://docs.tender.fi/tendienomics/rewards-and-incentives"
+            href="https://docs.lodestarfinance.io/tendienomics/rewards-and-incentives"
             target="_blank"
             rel="noreferrer"
           >
