@@ -42,8 +42,6 @@ export default function TwoPanels() {
     (token: Market) => token.supplyBalance && token.supplyBalanceInUsd > 0
   );
 
-  const ethPriceInUsd = tenderContextData.ethPriceInUsd;
-
   const marketsWithoutSupply = tenderContextData.markets.filter(
     (token: Market) => !token.supplyBalance || token.supplyBalanceInUsd <= 0
   );
@@ -144,7 +142,7 @@ export default function TwoPanels() {
                             alt={token.tokenPair.token.symbol}
                           />
                           <span className="flex text-sm md:text-base">
-                            {token.tokenPair.token.symbol}
+                            {'aaaa'}
                           </span>
                         </a>
                       </td>
@@ -207,10 +205,10 @@ export default function TwoPanels() {
                                         ),
                                       },
                                       {
-                                        coinTitle: "esTND",
+                                        coinTitle: "LODE",
                                         iconSrc:
-                                          "/images/wallet-icons/balance-icon.svg",
-                                        data: "?.??%",
+                                          "/images/wallet-icons/balance-icon1.svg",
+                                        data: (Math.pow(token.supplySpeeds * 7200 + 1, 365) - 1) * 100 + "%",
                                         color: "text-white",
                                       },
                                     ],
@@ -227,7 +225,7 @@ export default function TwoPanels() {
                                 <img
                                   aria-hidden={true}
                                   className="w-[13px] h-[13px] ml-[6px]"
-                                  src="/images/wallet-icons/balance-icon.svg"
+                                  src="/images/wallet-icons/balance-icon1.svg"
                                   alt="..."
                                 />
                               </div>
@@ -261,15 +259,15 @@ export default function TwoPanels() {
                                         <img
                                           aria-hidden={true}
                                           className="max-w-[18px]"
-                                          src="/images/wallet-icons/balance-icon.svg"
+                                          src="/images/wallet-icons/balance-icon1.svg"
                                           alt="..."
                                         />
                                         <span className="font-nova text-white text-sm font-normal">
-                                          esTND
+                                          LODE
                                         </span>
                                       </div>
                                       <span className="font-nova text-white text-sm font-normal whitespace-nowrap">
-                                        ?.??%
+                                        {(Math.pow(token.supplySpeeds * 7200 + 1, 365) - 1) * 100 + "%"}
                                       </span>
                                     </div>
                                   </div>
@@ -434,10 +432,10 @@ export default function TwoPanels() {
                                         ),
                                       },
                                       {
-                                        coinTitle: "esTND",
+                                        coinTitle: "LODE",
                                         iconSrc:
-                                          "/images/wallet-icons/balance-icon.svg",
-                                        data: "?.??%",
+                                          "/images/wallet-icons/balance-icon1.svg",
+                                        data: (Math.pow(token.supplySpeeds * 7200 + 1, 365) - 1) * 100 + "%",
                                         color: "text-white",
                                       },
                                     ],
@@ -454,7 +452,7 @@ export default function TwoPanels() {
                                 <img
                                   aria-hidden={true}
                                   className="w-[13px] h-[13px] ml-[6px]"
-                                  src="/images/wallet-icons/balance-icon.svg"
+                                  src="/images/wallet-icons/balance-icon1.svg"
                                   alt="..."
                                 />
                               </div>
@@ -488,15 +486,15 @@ export default function TwoPanels() {
                                         <img
                                           aria-hidden={true}
                                           className="max-w-[18px]"
-                                          src="/images/wallet-icons/balance-icon.svg"
+                                          src="/images/wallet-icons/balance-icon1.svg"
                                           alt="..."
                                         />
                                         <span className="font-nova text-white text-sm font-normal">
-                                          esTND
+                                          LODE
                                         </span>
                                       </div>
                                       <span className="font-nova text-white text-sm font-normal whitespace-nowrap">
-                                        ?.??%
+                                       {(Math.pow(token.supplySpeeds * 7200 + 1, 365) - 1) * 100 + "%"}
                                       </span>
                                     </div>
                                   </div>
@@ -574,7 +572,7 @@ export default function TwoPanels() {
                 {marketsWithBorrow.map((token: Market) => {
                   const borrowApy = parseFloat(token.marketData.borrowApy) * -1;
                   const borrowApyFormatted = formatApy(borrowApy);
-
+                  
                   return (
                     <tr
                       key={token.id}
@@ -666,10 +664,10 @@ export default function TwoPanels() {
                                         ),
                                       },
                                       {
-                                        coinTitle: "esTND",
+                                        coinTitle: "LODE",
                                         iconSrc:
-                                          "/images/wallet-icons/balance-icon.svg",
-                                        data: "?.??%",
+                                          "/images/wallet-icons/balance-icon1.svg",
+                                        data: (Math.pow(token.borrowSpeeds / 1e18 * 7200 + 1, 365) - 1) * 100 + "%",
                                         color: "text-white",
                                       },
                                     ],
@@ -686,7 +684,7 @@ export default function TwoPanels() {
                                 <img
                                   aria-hidden={true}
                                   className="w-[13px] h-[13px] ml-[6px]"
-                                  src="/images/wallet-icons/balance-icon.svg"
+                                  src="/images/wallet-icons/balance-icon1.svg"
                                   alt="..."
                                 />
                               </div>
@@ -718,15 +716,15 @@ export default function TwoPanels() {
                                         <img
                                           aria-hidden={true}
                                           className="max-w-[18px]"
-                                          src="/images/wallet-icons/balance-icon.svg"
+                                          src="/images/wallet-icons/balance-icon1.svg"
                                           alt="..."
                                         />
                                         <span className="font-nova text-white text-sm font-normal">
-                                          esTND
+                                          LODE
                                         </span>
                                       </div>
                                       <span className="font-nova text-white text-sm font-normal whitespace-nowrap">
-                                        ?.??%
+                                        {(Math.pow(token.borrowSpeeds / 1e18 * 7200 + 1, 365) - 1) * 100 + "%"}
                                       </span>
                                     </div>
                                   </div>
@@ -888,10 +886,10 @@ export default function TwoPanels() {
                                         ),
                                       },
                                       {
-                                        coinTitle: "esTND",
+                                        coinTitle: "LODE",
                                         iconSrc:
-                                          "/images/wallet-icons/balance-icon.svg",
-                                        data: "?.??%",
+                                          "/images/wallet-icons/balance-icon1.svg",
+                                        data: (Math.pow(token.borrowSpeeds / 1e18 * 7200 + 1, 365) - 1) * 100 + "%",
                                         color: "text-white",
                                       },
                                     ],
@@ -908,7 +906,7 @@ export default function TwoPanels() {
                                 <img
                                   aria-hidden={true}
                                   className="w-[13px] h-[13px] ml-[6px]"
-                                  src="/images/wallet-icons/balance-icon.svg"
+                                  src="/images/wallet-icons/balance-icon1.svg"
                                   alt="..."
                                 />
                               </div>
@@ -940,15 +938,15 @@ export default function TwoPanels() {
                                         <img
                                           aria-hidden={true}
                                           className="max-w-[18px]"
-                                          src="/images/wallet-icons/balance-icon.svg"
+                                          src="/images/wallet-icons/balance-icon1.svg"
                                           alt="..."
                                         />
                                         <span className="font-nova text-white text-sm font-normal">
-                                          esTND
+                                          LODE
                                         </span>
                                       </div>
                                       <span className="font-nova text-white text-sm font-normal whitespace-nowrap">
-                                        ?.??%
+                                      {(Math.pow(token.borrowSpeeds / 1e18 * 7200 + 1, 365) - 1) * 100 + "%"}
                                       </span>
                                     </div>
                                   </div>

@@ -63,10 +63,7 @@ function TokenChart({
       // @ts-ignore
       const data = historicalData[i][0];
       const supplyRate = data.supplyRate / ethBlocksPerYear;
-      const supplyApy =
-        marketInfo?.tokenSymbol === "GLP" || marketInfo?.tokenSymbol === "GMX"
-          ? data.supplyRate
-          : (Math.pow(supplyRate * blocksPerDay + 1, daysPerYear) - 1) * 100;
+      const supplyApy = (Math.pow(marketInfo?.supplyRate * blocksPerDay + 1, daysPerYear) - 1) * 100;
       const totalSupply =
         parseFloat(data.cash) +
         parseFloat(data.totalBorrows) -
@@ -104,7 +101,7 @@ function TokenChart({
         <a className="cursor-pointer hover:text-[#E5D540]" href="/markets/">
           Markets
         </a>
-        <span className="text-[#818987]"> / {marketInfo?.tokenSymbol}</span>
+        <span className="text-[#818987]"> / {marketInfo?.tokenSymbol} </span>
       </div>
       <TokenTopDetails marketInfo={marketInfo} />
     </div>

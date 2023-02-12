@@ -141,6 +141,27 @@ export function useMarkets(
           );
         }
 
+        let supplySpeedsPromise;
+        let borrowSpeedsPromise;
+
+        if (supplySpeedsPromise) {
+          // workaround for native token
+          let speedsContract = new ethers.Contract(
+            "0xeB156f76Ef69be485c18C297DeE5c45390345187",
+            SampleComptrollerAbi,
+            mcProvider
+          );
+          supplySpeedsPromise = speedsContract.compSupplySpeeds(
+            tp.cToken.address
+          );
+          if (borrowSpeedsPromise) {
+            borrowSpeedsPromise = speedsContract.compBorrowSpeeds(
+              tp.cToken.address
+            );
+          }
+        }
+
+
         // const autocompoundPromise = cTokenContract.autocompound();
 
         // let performanceFeePromise;
@@ -173,6 +194,8 @@ export function useMarkets(
           allowance: allowancePromise,
           borrowCaps: borrowCapsPromise,
           supplyCaps: supplyCapsPromise,
+          supplySpeeds: supplySpeedsPromise,
+          borrowSpeeds: borrowSpeedsPromise
         };
       });
 
@@ -199,6 +222,8 @@ export function useMarkets(
             : MINIMUM_REQUIRED_APPROVAL_BALANCE,
           borrowCaps: await tokenPromise.borrowCaps,
           supplyCaps: await tokenPromise.supplyCaps,
+          supplySpeeds: await tokenPromise?.supplySpeeds,
+          borrowSpeeds: await tokenPromise?.borrowSpeeds
         });
       }
 
@@ -329,6 +354,8 @@ export function useMarkets(
           borrowCaps: token.borrowCaps.toString(),
           supplyCaps: token.supplyCaps.toString(),
           collateralFactor,
+          supplySpeeds: token.supplySpeeds,
+          borrowSpeeds: token.borrowSpeeds
         };
       });
 

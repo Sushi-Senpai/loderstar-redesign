@@ -59,8 +59,8 @@ function TokenTopDetails({ marketInfo }: { marketInfo: object | boolean }) {
                       color: checkColorClass(supplyApy),
                     },
                     {
-                      coinTitle: "esTND",
-                      iconSrc: "/images/wallet-icons/balance-icon.svg",
+                      coinTitle: "LODE",
+                      iconSrc: "/images/wallet-icons/balance-icon1.svg",
                       data: "?.??%",
                       color: "text-white",
                     },
@@ -97,11 +97,11 @@ function TokenTopDetails({ marketInfo }: { marketInfo: object | boolean }) {
                       <div className="flex gap-[8px]">
                         <img
                           className="max-w-[18px]"
-                          src="/images/wallet-icons/balance-icon.svg"
+                          src="/images/wallet-icons/balance-icon1.svg"
                           alt="..."
                         />
                         <span className="font-nova text-white text-sm font-normal">
-                          esTND
+                          LODE
                         </span>
                       </div>
                       <span className="font-nova text-white text-sm font-normal whitespace-nowrap">
@@ -152,8 +152,8 @@ function TokenTopDetails({ marketInfo }: { marketInfo: object | boolean }) {
                         color: checkColorClass(borrowApy),
                       },
                       {
-                        coinTitle: "esTND",
-                        iconSrc: "/images/wallet-icons/balance-icon.svg",
+                        coinTitle: "LODE",
+                        iconSrc: "/images/wallet-icons/balance-icon1.svg",
                         data: "?.??%",
                         color: "text-white",
                       },
@@ -190,11 +190,11 @@ function TokenTopDetails({ marketInfo }: { marketInfo: object | boolean }) {
                         <div className="flex gap-[8px]">
                           <img
                             className="max-w-[18px]"
-                            src="/images/wallet-icons/balance-icon.svg"
+                            src="/images/wallet-icons/balance-icon1.svg"
                             alt="..."
                           />
                           <span className="font-nova text-white text-sm font-normal">
-                            esTND
+                            LODE
                           </span>
                         </div>
                         <span className="font-nova text-white text-sm font-normal whitespace-nowrap">

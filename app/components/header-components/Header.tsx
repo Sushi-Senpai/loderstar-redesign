@@ -96,9 +96,9 @@ export default function Header() {
           open: dataClaimModal.open,
           rewards: [
             {
-              title: "Protocol Rewards (esTND)",
-              exchange: "1 esTND = $0.0035",
-              unclaimed: "0 esTND",
+              title: "Protocol Rewards (LODE)",
+              exchange: "1 LODE = $0.0035",
+              unclaimed: "0 LODE",
               unclaimedUsd: "$0",
               onClickClaim: () => console.log(""),
             },
@@ -111,7 +111,7 @@ export default function Header() {
       <div className="header__block z-20 relative h-[71px] lg:h-[110px] flex items-center justify-between">
         <div className="flex w-full c items-center justify-between max-w-[1400px]">
           <div className="w-[104px] block lg:w-[196px] z-20 relative">
-            <a href="https://lodestarfinance.fi">
+            <a href="https://lodestarfinance.io">
               <img src="/images/logo1.svg" alt="Lodestar Finance" />
             </a>
           </div>
@@ -149,7 +149,7 @@ export default function Header() {
                 >
                   <img
                     className="w-[16px] h-[16px] mr-[0px] xl:mr-[9px]"
-                    src="/images/wallet-icons/balance-icon.svg"
+                    src="/images/wallet-icons/balance-icon1.svg"
                     alt="..."
                   />
                   <div className="whitespace-nowrap text-ellipsis overflow-hidden block text-sm font-semibold text-right leading-[14px] font-nova hidden xl:flex">

@@ -282,11 +282,11 @@ export default function Repay({
                         <div className="flex gap-[8px]">
                           <img
                             className="max-w-[18px]"
-                            src="/images/wallet-icons/balance-icon.svg"
+                            src="/images/wallet-icons/balance-icon1.svg"
                             alt="..."
                           />
                           <span className="font-nova text-white text-sm font-normal">
-                            esTND
+                            LODE
                           </span>
                         </div>
                         <span className="font-nova text-white text-sm font-normal whitespace-nowrap">

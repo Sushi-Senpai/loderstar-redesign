@@ -415,6 +415,7 @@ async function borrow(
 
     const formattedValue = ethers.utils.parseEther(value);
     console.log("input value:", value, "formattedValue:", formattedValue);
+    console.log("address:", cToken.address, "abi:", sampleCEtherAbi);
 
     let contract = new ethers.Contract(cToken.address, sampleCEtherAbi, signer);
     return await contract.borrow(formattedValue);
@@ -425,6 +426,9 @@ async function borrow(
       value,
       token.decimals
     );
+
+    console.log("input value:", value, "formattedValue:", formattedValue);
+    console.log("address:", cToken.address, "abi:", sampleCEtherAbi);
 
     let contract = new ethers.Contract(cToken.address, SampleCTokenAbi, signer);
     return await contract.borrow(formattedValue);

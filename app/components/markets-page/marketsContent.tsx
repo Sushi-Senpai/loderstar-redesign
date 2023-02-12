@@ -349,9 +349,9 @@ export default function MarketsContent() {
                                       ),
                                     },
                                     {
-                                      coinTitle: "esTND",
+                                      coinTitle: "LODE",
                                       iconSrc:
-                                        "/images/wallet-icons/balance-icon.svg",
+                                        "/images/wallet-icons/balance-icon1.svg",
                                       data: "?.??%",
                                       color: "text-white",
                                     },
@@ -369,7 +369,7 @@ export default function MarketsContent() {
                               <img
                                 aria-hidden={true}
                                 className="w-[13px] h-[13px] ml-[6px]"
-                                src="/images/wallet-icons/balance-icon.svg"
+                                src="/images/wallet-icons/balance-icon1.svg"
                                 alt="..."
                               />
                             </div>
@@ -401,11 +401,11 @@ export default function MarketsContent() {
                                       <img
                                         aria-hidden={true}
                                         className="max-w-[18px]"
-                                        src="/images/wallet-icons/balance-icon.svg"
+                                        src="/images/wallet-icons/balance-icon1.svg"
                                         alt="..."
                                       />
                                       <span className="font-nova text-white text-sm font-normal">
-                                        esTND
+                                        LODE
                                       </span>
                                     </div>
                                     <span className="font-nova text-white text-sm font-normal whitespace-nowrap">
@@ -481,9 +481,9 @@ export default function MarketsContent() {
                                           color: checkColorClass(borrowApy),
                                         },
                                         {
-                                          coinTitle: "esTND",
+                                          coinTitle: "LODE",
                                           iconSrc:
-                                            "/images/wallet-icons/balance-icon.svg",
+                                            "/images/wallet-icons/balance-icon1.svg",
                                           data: "?.??%",
                                           color: "text-white",
                                         },
@@ -501,7 +501,7 @@ export default function MarketsContent() {
                                   <img
                                     aria-hidden={true}
                                     className="w-[13px] h-[13px] ml-[6px]"
-                                    src="/images/wallet-icons/balance-icon.svg"
+                                    src="/images/wallet-icons/balance-icon1.svg"
                                     alt="..."
                                   />
                                 </div>
@@ -533,11 +533,11 @@ export default function MarketsContent() {
                                           <img
                                             aria-hidden={true}
                                             className="max-w-[18px]"
-                                            src="/images/wallet-icons/balance-icon.svg"
+                                            src="/images/wallet-icons/balance-icon1.svg"
                                             alt="..."
                                           />
                                           <span className="font-nova text-white text-sm font-normal">
-                                            esTND
+                                            LODE
                                           </span>
                                         </div>
                                         <span className="font-nova text-white text-sm font-normal whitespace-nowrap">

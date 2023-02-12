@@ -106,5 +106,7 @@ export type Market = {
   liquidationPenalty: number;
   borrowCaps: string,
   supplyCaps: string,
-  collateralFactor: number
+  collateralFactor: number,
+  supplySpeeds: number,
+  borrowSpeeds: number
 };
