@@ -23,15 +23,6 @@ import { Web3ReactProvider } from "@web3-react/core";
 import type { MetaMask } from "@web3-react/metamask";
 
 import { hooks as metaMaskHooks, metaMask } from "~/connectors/meta-mask";
-import { configureChains, createClient, WagmiConfig } from "wagmi";
-import { arbitrum, mainnet, polygon } from "wagmi/chains";
-import {
-  EthereumClient,
-  modalConnectors,
-  walletConnectProvider,
-} from "@web3modal/ethereum";
-import { publicProvider } from "wagmi/providers/public";
-import { Web3Modal } from "@web3modal/react";
 
 import { useOnSupportedNetwork } from "./hooks/use-on-supported-network";
 import Header from "./components/header-components/Header";
@@ -41,29 +32,11 @@ export const links: LinksFunction = () => [
   { rel: "stylesheet", href: globalStyles },
 ];
 export const meta: MetaFunction = () => {
-  return { title: "lodestarfinance.io" };
+  return { title: "Tender.fi" };
 };
 
-const chains = [arbitrum, mainnet, polygon];
-
-// Wagmi client
-const { provider } = configureChains(chains, [publicProvider()]);
-const wagmiClient = createClient({
-  autoConnect: true,
-  connectors: modalConnectors({
-    projectId: "160c8923a4fcdc7864190c3fadf63ef4",
-    version: "1", // or "2"
-    appName: "web3Modal",
-    chains,
-  }),
-  provider,
-});
-
-// Web3Modal Ethereum Client
-const ethereumClient = new EthereumClient(wagmiClient, chains);
-
 if (process.env.NODE_ENV === "production")
-  LogRocket.init("6bquwn/lodestar-frontend");
+  LogRocket.init("6bquwn/tender-frontend");
 
 const connectors: [MetaMask, Web3ReactHooks][] = [[metaMask, metaMaskHooks]];
 
@@ -87,14 +60,7 @@ export default function App() {
         <div id="m"></div>
         <Toaster />
         <Web3ReactProvider connectors={connectors}>
-          <WagmiConfig client={wagmiClient}>
-            <Header />
-          </WagmiConfig>
-
-          <Web3Modal
-            projectId="<YOUR_PROJECT_ID>"
-            ethereumClient={ethereumClient}
-          />
+          <Header />
           <Outlet />
         </Web3ReactProvider>
         <Footer />
@@ -118,10 +84,10 @@ export function CatchBoundary() {
       <body className="h-[100vh] relative flex flex-col justify-between">
         <header className="mt-0 mb-0 flex w-full c items-center justify-between max-w-[1400px] relative h-[71px] lg:h-[110px] flex items-center">
           <a
-            href="https://lodestarfinance.io"
+            href="https://tender.fi"
             className="w-[104px] block lg:w-[196px] z-20 relative"
           >
-            <img src="/images/logo1.svg" alt="Lodestar Finance" />
+            <img src="/images/logo1.svg" alt="Tender Finance" />
           </a>
         </header>
         <img
@@ -141,7 +107,7 @@ export function CatchBoundary() {
           <div className="ml-[auto] mr-[auto] btn-custom-border rounded-[6px] w-[160px] h-[50px] md:w-[180px] md:h-[60px]">
             <a
               href="/"
-              className="font-space flex font-bold items-center justify-center w-full h-full rounded-[6px] text-[#E5D540] text-[15px] leading-5 bg-[#0e3625] relative z-[2] hover:bg-[#1e573fb5]"
+              className="font-space flex font-bold items-center justify-center w-full h-full rounded-[6px] text-[#14F195] text-[15px] leading-5 bg-[#0e3625] relative z-[2] hover:bg-[#1e573fb5]"
             >
               BACK TO HOME
             </a>
