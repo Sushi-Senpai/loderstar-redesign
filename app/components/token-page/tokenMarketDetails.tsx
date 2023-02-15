@@ -48,7 +48,12 @@ function TokenMarketDetails({
     {
       show: true,
       itemName: "Utilization",
-      itemData: ((marketInfo.totalBorrows / (marketInfo.cash + marketInfo.totalBorrows)) * 100).toFixed(2) + "%",
+      itemData:
+        (
+          (marketInfo.totalBorrows /
+            (marketInfo.cash + marketInfo.totalBorrows)) *
+          100
+        ).toFixed(2) + "%",
     },
     {
       show: true,
@@ -204,14 +209,18 @@ function TokenMarketDetails({
     {
       show: true,
       itemName: marketInfo.cTokenSymbol + " Minted",
-      itemData: <DisplayPrice amount={(marketInfo.totalSupply/marketInfo.exchangeRate).toString()} />,
+      itemData: (
+        <DisplayPrice
+          amount={(marketInfo.totalSupply / marketInfo.exchangeRate).toString()}
+        />
+      ),
     },
     {
       show: true,
       itemName: "Exchange Rate",
       itemData: (
         <>
-          1 {marketInfo.tokenSymbol} = {" "}
+          1 {marketInfo.tokenSymbol} ={" "}
           <DisplayPrice
             amount={(1 / Number(marketInfo.exchangeRate)).toString()}
             tokenSymbol={marketInfo.cTokenSymbol}
