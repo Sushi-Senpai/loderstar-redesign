@@ -5,7 +5,11 @@ import { NetworkData } from "~/types/global";
  * @param error The error object returned from metamask
  * @param defaultMessage The failure message to display if this is not handled
  */
-export function displayErrorMessage(networkData: NetworkData, error: any, defaultMessage: string) {
+export function displayErrorMessage(
+  networkData: NetworkData,
+  error: any,
+  defaultMessage: string
+) {
   toast.dismiss();
 
   if (error.transaction?.hash) {
@@ -24,8 +28,8 @@ export function displayErrorMessage(networkData: NetworkData, error: any, defaul
     toast.error("Insufficient gas for the transaction.");
   } else if (error.reason.includes("invalid _amount")) {
     // when the requested amount is too small, GMX truncates to 0 and the transaction fails
-    toast.error("Requested transaction amount too small.")
-   } else {
+    toast.error("Requested transaction amount too small.");
+  } else {
     toast.error(defaultMessage);
   }
 }

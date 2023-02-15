@@ -56,7 +56,7 @@ export default function TwoPanels() {
       (token: Market) => !token.borrowBalance || token.borrowBalanceInUsd <= 0
     );
 
-    return tenderContextData.markets.length ? (
+  return tenderContextData.markets.length ? (
     <div className="flex flex-col xl:grid grid-cols-2 gap-[60px] xl:gap-[20px] mb-14">
       <TooltipMobile
         mobileTooltipData={mobileTooltipData}
@@ -123,7 +123,8 @@ export default function TwoPanels() {
                       onKeyUp={(e) =>
                         e.key === "Enter" &&
                         window.open(
-                          `/markets/${token.tokenPair.token.symbol}/`
+                          `/markets/${token.tokenPair.token.symbol}/`,
+                          "_self"
                         )
                       }
                     >
@@ -131,7 +132,7 @@ export default function TwoPanels() {
                         <a
                           className="flex items-center h-full  relative items-center justify-left text-white font-nova font-normal pl-[14px] pb-[30px] md:pt-[24px] md:pb-[39px] pl-[15px] md:pl-[30px] pr-[15px]"
                           href={`/markets/${token.tokenPair.token.symbol}`}
-                          // target="_self"
+                          target="_self"
                           rel="noreferrer"
                         >
                           <img
@@ -149,7 +150,7 @@ export default function TwoPanels() {
                         <a
                           className="relative flex items-center h-full  whitespace-nowrap md:whitespace-normal relative text-white font-nova font-normal pb-[30px] md:pt-[24px] md:pb-[39px] pl-[15px] pr-[15px] text-sm md:text-base"
                           href={`/markets/${token.tokenPair.token.symbol}`}
-                          // target="_self"
+                          target="_self"
                           rel="noreferrer"
                         >
                           <div className="custom__hidden">
@@ -161,7 +162,7 @@ export default function TwoPanels() {
                           <div className="!flex items-center break-words bg-dark-green text-dark-green rounded-md text-[11px] md:text-xs text-center h-[20px] md:h-[22px] px-[5px] absolute top-[25px] md:top-[61px] left-[15px]">
                             <DisplayPrice
                               amount={token.marketData.marketSize?.toString()}
-                              baseFactor={(token.tokenPair.token.priceInEth).toString()}
+                              baseFactor={token.tokenPair.token.priceInEth.toString()}
                               isCompact
                             />
                           </div>
@@ -171,7 +172,7 @@ export default function TwoPanels() {
                         <a
                           className="flex items-center h-full  relative pl-[15px] pb-[30px] text-white font-nova font-normal md:pt-[24px] md:pb-[39px] pl-[15px] pr-[15px] text-sm md:text-base"
                           href={`/markets/${token.tokenPair.token.symbol}`}
-                          // target="_self"
+                          target="_self"
                           rel="noreferrer"
                         >
                           <div
@@ -207,7 +208,14 @@ export default function TwoPanels() {
                                         coinTitle: "LODE",
                                         iconSrc:
                                           "/images/wallet-icons/balance-icon1.svg",
-                                        data: (Math.pow(token.supplySpeeds * 7200 + 1, 365) - 1) * 100 + "%",
+                                        data:
+                                          (Math.pow(
+                                            token.supplySpeeds * 7200 + 1,
+                                            365
+                                          ) -
+                                            1) *
+                                            100 +
+                                          "%",
                                         color: "text-white",
                                       },
                                     ],
@@ -266,7 +274,13 @@ export default function TwoPanels() {
                                         </span>
                                       </div>
                                       <span className="font-nova text-white text-sm font-normal whitespace-nowrap">
-                                        {(Math.pow(token.supplySpeeds * 7200 + 1, 365) - 1) * 100 + "%"}
+                                        {(Math.pow(
+                                          token.supplySpeeds * 7200 + 1,
+                                          365
+                                        ) -
+                                          1) *
+                                          100 +
+                                          "%"}
                                       </span>
                                     </div>
                                   </div>
@@ -281,7 +295,7 @@ export default function TwoPanels() {
                         <a
                           className="flex items-center h-full relative text-white font-nova font-normal pb-[30px] md:pt-[24px] md:pb-[39px] pl-[15px] pr-[20px text-sm md:text-base]"
                           href={`/markets/${token.tokenPair.token.symbol}`}
-                          // target="_self"
+                          target="_self"
                           rel="noreferrer"
                         >
                           <div className="custom__hidden">
@@ -347,7 +361,8 @@ export default function TwoPanels() {
                       onKeyUp={(e) =>
                         e.key === "Enter" &&
                         window.open(
-                          `/markets/${token.tokenPair.token.symbol}/`
+                          `/markets/${token.tokenPair.token.symbol}/`,
+                          "_self"
                         )
                       }
                     >
@@ -355,7 +370,7 @@ export default function TwoPanels() {
                         <a
                           className="relative flex items-center h-full  text-white font-nova font-normal pl-[14px] pb-[30px] md:pt-[24px] md:pb-[39px] pl-[15px] md:pl-[30px] pr-[15px]"
                           href={`/markets/${token.tokenPair.token.symbol}`}
-                          // target="_self"
+                          target="_self"
                           rel="noreferrer"
                         >
                           <div className="flex items-center justify-left">
@@ -375,7 +390,7 @@ export default function TwoPanels() {
                         <a
                           className="flex items-center h-full relative whitespace-nowrap md:whitespace-normal relative text-white font-nova font-normal pb-[30px] md:pt-[24px] md:pb-[39px] pl-[15px] pr-[15px] text-sm md:text-base"
                           href={`/markets/${token.tokenPair.token.symbol}`}
-                          // target="_self"
+                          target="_self"
                           rel="noreferrer"
                         >
                           <div className="custom__hidden">
@@ -387,7 +402,7 @@ export default function TwoPanels() {
                           <div className="!flex items-center break-words bg-dark-green text-dark-green rounded-md text-[11px] md:text-xs text-center h-[20px] md:h-[22px] px-[5px] absolute top-[25px] md:top-[61px] left-[15px]">
                             <DisplayPrice
                               amount={token.marketData.marketSize?.toString()}
-                              baseFactor={(token.tokenPair.token.priceInEth).toString()}
+                              baseFactor={token.tokenPair.token.priceInEth.toString()}
                               isCompact
                             />
                           </div>
@@ -397,7 +412,7 @@ export default function TwoPanels() {
                         <a
                           className="flex items-center h-full relative pl-[15px] pb-[30px] text-white font-nova font-normal md:pt-[24px] md:pb-[39px] pl-[15px] pr-[15px] text-sm md:text-base"
                           href={`/markets/${token.tokenPair.token.symbol}`}
-                          // target="_self"
+                          target="_self"
                           rel="noreferrer"
                         >
                           <div
@@ -433,7 +448,14 @@ export default function TwoPanels() {
                                         coinTitle: "LODE",
                                         iconSrc:
                                           "/images/wallet-icons/balance-icon1.svg",
-                                        data: (Math.pow(token.supplySpeeds * 7200 + 1, 365) - 1) * 100 + "%",
+                                        data:
+                                          (Math.pow(
+                                            token.supplySpeeds * 7200 + 1,
+                                            365
+                                          ) -
+                                            1) *
+                                            100 +
+                                          "%",
                                         color: "text-white",
                                       },
                                     ],
@@ -492,7 +514,13 @@ export default function TwoPanels() {
                                         </span>
                                       </div>
                                       <span className="font-nova text-white text-sm font-normal whitespace-nowrap">
-                                       {(Math.pow(token.supplySpeeds * 7200 + 1, 365) - 1) * 100 + "%"}
+                                        {(Math.pow(
+                                          token.supplySpeeds * 7200 + 1,
+                                          365
+                                        ) -
+                                          1) *
+                                          100 +
+                                          "%"}
                                       </span>
                                     </div>
                                   </div>
@@ -507,7 +535,7 @@ export default function TwoPanels() {
                         <a
                           className="flex items-center h-full relative text-white font-nova font-normal pb-[30px] md:pt-[24px] md:pb-[39px] pl-[15px] pr-[20px text-sm md:text-base]"
                           href={`/markets/${token.tokenPair.token.symbol}`}
-                          // target="_self"
+                          target="_self"
                           rel="noreferrer"
                         >
                           <div className="custom__hidden">
@@ -521,7 +549,7 @@ export default function TwoPanels() {
                             <DisplayPrice
                               amount={token.walletBalance}
                               decimals={token.tokenPair.token.decimals}
-                              baseFactor={(token.tokenPair.token.priceInEth).toString()}
+                              baseFactor={token.tokenPair.token.priceInEth.toString()}
                               isCompact
                             />
                           </div>
@@ -570,7 +598,7 @@ export default function TwoPanels() {
                 {marketsWithBorrow.map((token: Market) => {
                   const borrowApy = parseFloat(token.marketData.borrowApy) * -1;
                   const borrowApyFormatted = formatApy(borrowApy);
-                  
+
                   return (
                     <tr
                       key={token.id}
@@ -580,7 +608,8 @@ export default function TwoPanels() {
                       onKeyUp={(e) =>
                         e.key === "Enter" &&
                         window.open(
-                          `/markets/${token.tokenPair.token.symbol}/`
+                          `/markets/${token.tokenPair.token.symbol}/`,
+                          "_self"
                         )
                       }
                     >
@@ -588,7 +617,7 @@ export default function TwoPanels() {
                         <a
                           className="flex items-center h-full relative text-white font-nova font-normal pl-[14px] pb-[30px] md:pt-[24px] md:pb-[39px] pl-[15px] md:pl-[30px] pr-[15px]"
                           href={`/markets/${token.tokenPair.token.symbol}`}
-                          // target="_self"
+                          target="_self"
                           rel="noreferrer"
                         >
                           <div className="flex items-center justify-left">
@@ -608,7 +637,7 @@ export default function TwoPanels() {
                         <a
                           className="flex items-center h-full whitespace-nowrap md:whitespace-normal relative text-white font-nova font-normal pb-[30px] md:pt-[24px] md:pb-[39px] pl-[15px] pr-[15px] text-sm md:text-base"
                           href={`/markets/${token.tokenPair.token.symbol}`}
-                          // target="_self"
+                          target="_self"
                           rel="noreferrer"
                         >
                           <div className="custom__hidden">
@@ -620,7 +649,7 @@ export default function TwoPanels() {
                           <div className="!flex items-center break-words bg-dark-green text-dark-green rounded-md text-[11px] md:text-xs text-center h-[20px] md:h-[22px] px-[5px] absolute top-[25px] md:top-[61px] left-[15px]">
                             <DisplayPrice
                               amount={token.marketData?.totalBorrowed?.toString()}
-                              baseFactor={(token.tokenPair.token.priceInEth).toString()}
+                              baseFactor={token.tokenPair.token.priceInEth.toString()}
                               isCompact
                             />
                           </div>
@@ -630,7 +659,7 @@ export default function TwoPanels() {
                         <a
                           className="flex items-center h-full relative pl-[15px] pb-[30px] text-white font-nova font-normal md:pt-[24px] md:pb-[39px] pl-[15px] pr-[15px] text-sm md:text-base"
                           href={`/markets/${token.tokenPair.token.symbol}`}
-                          // target="_self"
+                          target="_self"
                           rel="noreferrer"
                         >
                           <div
@@ -664,7 +693,15 @@ export default function TwoPanels() {
                                         coinTitle: "LODE",
                                         iconSrc:
                                           "/images/wallet-icons/balance-icon1.svg",
-                                        data: (Math.pow(token.borrowSpeeds / 1e18 * 7200 + 1, 365) - 1) * 100 + "%",
+                                        data:
+                                          (Math.pow(
+                                            (token.borrowSpeeds / 1e18) * 7200 +
+                                              1,
+                                            365
+                                          ) -
+                                            1) *
+                                            100 +
+                                          "%",
                                         color: "text-white",
                                       },
                                     ],
@@ -721,7 +758,14 @@ export default function TwoPanels() {
                                         </span>
                                       </div>
                                       <span className="font-nova text-white text-sm font-normal whitespace-nowrap">
-                                        {(Math.pow(token.borrowSpeeds / 1e18 * 7200 + 1, 365) - 1) * 100 + "%"}
+                                        {(Math.pow(
+                                          (token.borrowSpeeds / 1e18) * 7200 +
+                                            1,
+                                          365
+                                        ) -
+                                          1) *
+                                          100 +
+                                          "%"}
                                       </span>
                                     </div>
                                   </div>
@@ -736,7 +780,7 @@ export default function TwoPanels() {
                         <a
                           className="flex items-center h-full relative text-white font-nova font-normal pb-[30px] md:pt-[24px] md:pb-[39px] pl-[15px] pr-[20px text-sm md:text-base]"
                           href={`/markets/${token.tokenPair.token.symbol}`}
-                          // target="_self"
+                          target="_self"
                           rel="noreferrer"
                         >
                           <div className="custom__hidden">
@@ -801,7 +845,8 @@ export default function TwoPanels() {
                       onKeyUp={(e) =>
                         e.key === "Enter" &&
                         window.open(
-                          `/markets/${token.tokenPair.token.symbol}/`
+                          `/markets/${token.tokenPair.token.symbol}/`,
+                          "_self"
                         )
                       }
                     >
@@ -809,7 +854,7 @@ export default function TwoPanels() {
                         <a
                           className="flex items-center h-full relative text-white font-nova font-normal pl-[14px] pb-[30px] md:pt-[24px] md:pb-[39px] pl-[15px] md:pl-[30px] pr-[15px]"
                           href={`/markets/${token.tokenPair.token.symbol}`}
-                          // target="_self"
+                          target="_self"
                           rel="noreferrer"
                         >
                           <div className="flex items-center justify-left">
@@ -829,7 +874,7 @@ export default function TwoPanels() {
                         <a
                           className="flex items-center h-full whitespace-nowrap md:whitespace-normal relative text-white font-nova font-normal pb-[30px] md:pt-[24px] md:pb-[39px] pl-[15px] pr-[15px] text-sm md:text-base"
                           href={`/markets/${token.tokenPair.token.symbol}`}
-                          // target="_self"
+                          target="_self"
                           rel="noreferrer"
                         >
                           <div className="custom__hidden">
@@ -841,7 +886,7 @@ export default function TwoPanels() {
                           <div className="!flex items-center break-words bg-dark-green text-dark-green rounded-md text-[11px] md:text-xs text-center h-[20px] md:h-[22px] px-[5px] absolute top-[25px] md:top-[61px] left-[15px]">
                             <DisplayPrice
                               amount={token.marketData?.totalBorrowed?.toString()}
-                              baseFactor={(token.tokenPair.token.priceInEth).toString()}
+                              baseFactor={token.tokenPair.token.priceInEth.toString()}
                               isCompact
                             />
                           </div>
@@ -851,7 +896,7 @@ export default function TwoPanels() {
                         <a
                           className="flex items-center h-full relative pl-[15px] pb-[30px] text-white font-nova font-normal md:pt-[24px] md:pb-[39px] pl-[15px] pr-[15px] text-sm md:text-base"
                           href={`/markets/${token.tokenPair.token.symbol}`}
-                          // target="_self"
+                          target="_self"
                           rel="noreferrer"
                         >
                           <div
@@ -885,7 +930,15 @@ export default function TwoPanels() {
                                         coinTitle: "LODE",
                                         iconSrc:
                                           "/images/wallet-icons/balance-icon1.svg",
-                                        data: (Math.pow(token.borrowSpeeds / 1e18 * 7200 + 1, 365) - 1) * 100 + "%",
+                                        data:
+                                          (Math.pow(
+                                            (token.borrowSpeeds / 1e18) * 7200 +
+                                              1,
+                                            365
+                                          ) -
+                                            1) *
+                                            100 +
+                                          "%",
                                         color: "text-white",
                                       },
                                     ],
@@ -942,7 +995,14 @@ export default function TwoPanels() {
                                         </span>
                                       </div>
                                       <span className="font-nova text-white text-sm font-normal whitespace-nowrap">
-                                      {(Math.pow(token.borrowSpeeds / 1e18 * 7200 + 1, 365) - 1) * 100 + "%"}
+                                        {(Math.pow(
+                                          (token.borrowSpeeds / 1e18) * 7200 +
+                                            1,
+                                          365
+                                        ) -
+                                          1) *
+                                          100 +
+                                          "%"}
                                       </span>
                                     </div>
                                   </div>
@@ -957,7 +1017,7 @@ export default function TwoPanels() {
                         <a
                           className="flex items-center h-full relative text-white font-nova font-normal pb-[30px] md:pt-[24px] md:pb-[39px] pl-[15px] pr-[20px text-sm md:text-base]"
                           href={`/markets/${token.tokenPair.token.symbol}`}
-                          // target="_self"
+                          target="_self"
                           rel="noreferrer"
                         >
                           <div className="custom__hidden">
@@ -969,7 +1029,7 @@ export default function TwoPanels() {
                           <div className="!flex items-center break-words bg-dark-green text-dark-green rounded-md text-[11px] md:text-xs text-center h-[20px] md:h-[22px] px-[5px] absolute top-[25px] md:top-[61px] left-[15px]">
                             <DisplayPrice
                               amount={token.maxBorrowLiquidity.toString()}
-                              baseFactor={(token.tokenPair.token.priceInEth).toString()}
+                              baseFactor={token.tokenPair.token.priceInEth.toString()}
                               isCompact
                             />
                           </div>
