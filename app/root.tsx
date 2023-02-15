@@ -23,6 +23,15 @@ import { Web3ReactProvider } from "@web3-react/core";
 import type { MetaMask } from "@web3-react/metamask";
 
 import { hooks as metaMaskHooks, metaMask } from "~/connectors/meta-mask";
+import { configureChains, createClient, WagmiConfig } from "wagmi";
+import { arbitrum, mainnet, polygon } from "wagmi/chains";
+import {
+  EthereumClient,
+  modalConnectors,
+  walletConnectProvider,
+} from "@web3modal/ethereum";
+import { publicProvider } from "wagmi/providers/public";
+import { Web3Modal } from "@web3modal/react";
 
 import { useOnSupportedNetwork } from "./hooks/use-on-supported-network";
 import Header from "./components/header-components/Header";
@@ -35,8 +44,26 @@ export const meta: MetaFunction = () => {
   return { title: "lodestarfinance.io" };
 };
 
+const chains = [arbitrum, mainnet, polygon];
+
+// Wagmi client
+const { provider } = configureChains(chains, [publicProvider()]);
+const wagmiClient = createClient({
+  autoConnect: true,
+  connectors: modalConnectors({
+    projectId: "160c8923a4fcdc7864190c3fadf63ef4",
+    version: "1", // or "2"
+    appName: "web3Modal",
+    chains,
+  }),
+  provider,
+});
+
+// Web3Modal Ethereum Client
+const ethereumClient = new EthereumClient(wagmiClient, chains);
+
 if (process.env.NODE_ENV === "production")
-  LogRocket.init("6bquwn/tender-frontend");
+  LogRocket.init("6bquwn/lodestar-frontend");
 
 const connectors: [MetaMask, Web3ReactHooks][] = [[metaMask, metaMaskHooks]];
 
@@ -60,7 +87,14 @@ export default function App() {
         <div id="m"></div>
         <Toaster />
         <Web3ReactProvider connectors={connectors}>
-          <Header />
+          <WagmiConfig client={wagmiClient}>
+            <Header />
+          </WagmiConfig>
+
+          <Web3Modal
+            projectId="<YOUR_PROJECT_ID>"
+            ethereumClient={ethereumClient}
+          />
           <Outlet />
         </Web3ReactProvider>
         <Footer />

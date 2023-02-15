@@ -419,20 +419,18 @@ async function borrow(
     console.log("address:", cToken.address, "abi:", sampleCEtherAbi);
 
     let contract = new ethers.Contract(cToken.address, sampleCEtherAbi, signer);
+    console.log(contract);
     return await contract.borrow(formattedValue);
   }
   else {
 
-    const formattedValue: BigNumber = ethers.utils.parseUnits(
-      value,
-      token.decimals
-    );
+    let contract = new ethers.Contract(cToken.address, SampleCTokenAbi, signer);
+    const formattedValue: BigNumber = ethers.utils.parseUnits(value, token.decimals);
 
     console.log("input value:", value, "formattedValue:", formattedValue);
     console.log("address:", cToken.address, "abi:", sampleCtokenAbi);
 
-    let contract = new ethers.Contract(cToken.address, SampleCTokenAbi, signer);
-    return await contract.borrow(formattedValue);
+    return await contract.borrow(1);
   }
 }
 
