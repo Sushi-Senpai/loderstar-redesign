@@ -244,7 +244,7 @@ const NetworksDropdown = () => {
                             key={link.linkName}
                             className="flex group items-center justify-between pl-[14px] pr-[14px] pt-[6px] pb-[6px] text-[#818987] hover:text-[#E5D540] font-nova text-sm font-medium"
                             href={link.url}
-                            target="_blank"
+                            target="_self"
                             rel="noreferrer"
                           >
                             {link.linkName}

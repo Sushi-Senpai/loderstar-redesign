@@ -146,7 +146,7 @@ const WalletDropdown = (props: Props) => {
         </button>
         <a
           className="flex items-center p-[14px] hover:bg-[#2B302F] cursor-pointer"
-          target="_blank"
+          target="_self"
           rel="noreferrer"
           href={networkData?.userExplorerUrl + props.addresses[0] || ""}
         >

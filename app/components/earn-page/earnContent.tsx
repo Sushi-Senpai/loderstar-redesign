@@ -51,7 +51,7 @@ export default function EarnContent() {
           <a
             className="line-solid cursor-pointer text-white"
             href="https://docs.lodestarfinance.io/tendienomics/rewards-and-incentives"
-            target="_blank"
+            target="_self"
             rel="noreferrer"
           >
             staking details
@@ -198,7 +198,7 @@ export default function EarnContent() {
                             Boost your rewards with Multiplier Points.{" "}
                             <a
                               onBlur={(e) => setTabFocus(0)}
-                              target="_blank"
+                              target="_self"
                               rel="noreferrer"
                               className="line-solid cursor-pointer capitalize text-white"
                               href="https://docs.lodestarfinance.io/tendienomics/rewards-and-incentives#multiplier-points"
@@ -306,7 +306,7 @@ export default function EarnContent() {
                 ) : !window.ethereum ? (
                   <a
                     className="btn-custom-border rounded-[6px]"
-                    target="_blank"
+                    target="_self"
                     rel="noreferrer"
                     href="https://metamask.io/"
                   >
@@ -425,7 +425,7 @@ export default function EarnContent() {
                             Boost your rewards with Multiplier Points.{" "}
                             <a
                               onBlur={(e) => setTabFocus(0)}
-                              target="_blank"
+                              target="_self"
                               rel="noreferrer"
                               className="line-solid cursor-pointer capitalize text-white"
                               href="https://docs.lodestarfinance.io/tendienomics/rewards-and-incentives#multiplier-points"
@@ -482,7 +482,7 @@ export default function EarnContent() {
                 ) : !window.ethereum ? (
                   <a
                     className="btn-custom-border rounded-[6px]"
-                    target="_blank"
+                    target="_self"
                     rel="noreferrer"
                     href="https://metamask.io/"
                   >
@@ -573,14 +573,14 @@ export default function EarnContent() {
               <div className="font-space flex flex-wrap items-center pt-[32px] gap-[12px] gap-y-[13px] md:gap-x-[17px]">
                 <div className="btn-custom-border rounded-[6px]">
                   <button
-                    onClick={() => window.open("/", "_blank")}
+                    onClick={() => window.open("/", "_self")}
                     className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#E5D540] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] uppercase hover:bg-[#1e573fb5]"
                   >
                     Dashboard
                   </button>
                 </div>
                 <div
-                  onClick={() => window.open("/markets/", "_blank")}
+                  onClick={() => window.open("/markets/", "_self")}
                   className="btn-custom-border rounded-[6px]"
                 >
                   <button className="px-[12px] pt-[6px] py-[7px] md:px-[16px] md:py-[8px] text-[#E5D540] text-xs leading-5 md:text-sm md:leading-[22px] rounded-[6px] bg-[#0e3625] relative z-[2] uppercase hover:bg-[#1e573fb5]">
@@ -647,7 +647,7 @@ export default function EarnContent() {
                             Boost your rewards with Multiplier Points.{" "}
                             <a
                               onBlur={(e) => setTabFocus(0)}
-                              target="_blank"
+                              target="_self"
                               rel="noreferrer"
                               className="line-solid cursor-pointer capitalize text-white"
                               href="https://docs.lodestarfinance.io/tendienomics/rewards-and-incentives#multiplier-points"
@@ -685,7 +685,7 @@ export default function EarnContent() {
                             Boost your rewards with Multiplier Points.{" "}
                             <a
                               onBlur={(e) => setTabFocus(0)}
-                              target="_blank"
+                              target="_self"
                               rel="noreferrer"
                               className="line-solid cursor-pointer capitalize text-white"
                               href="https://docs.lodestarfinance.io/tendienomics/rewards-and-incentives#multiplier-points"
@@ -731,7 +731,7 @@ export default function EarnContent() {
                 ) : !window.ethereum ? (
                   <a
                     className="btn-custom-border rounded-[6px]"
-                    target="_blank"
+                    target="_self"
                     rel="noreferrer"
                     href="https://metamask.io/"
                   >
@@ -762,7 +762,7 @@ export default function EarnContent() {
           <a
             className="cursor-pointer line-solid text-white"
             href="https://docs.lodestarfinance.io/tendienomics/rewards-and-incentives#vesting"
-            target="_blank"
+            target="_self"
             rel="noreferrer"
           >
             vesting details
@@ -893,7 +893,7 @@ export default function EarnContent() {
                 ) : !window.ethereum ? (
                   <a
                     className="btn-custom-border rounded-[6px]"
-                    target="_blank"
+                    target="_self"
                     rel="noreferrer"
                     href="https://metamask.io/"
                   >

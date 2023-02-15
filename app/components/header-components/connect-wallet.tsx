@@ -47,7 +47,7 @@ export default function ConnectWallet({ inMenu }: { inMenu?: boolean }) {
             {!window.ethereum && (
               <a
                 className="border font-space flex items-center justify-center font-bold uppercase rounded-md text-dark-green w-[110px] xl:text-sm h-[34px] xl:w-[160px] border-[#E5D540] xl:h-[44px] text-[10px] hover:opacity-[0.6]"
-                target="_blank"
+                target="_self"
                 rel="noreferrer"
                 href="https://metamask.io/"
               >

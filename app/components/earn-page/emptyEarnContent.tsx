@@ -11,7 +11,7 @@ export default function EmptyEarnContent() {
           <a
             className="line-solid cursor-pointer text-white"
             href="https://docs.lodestarfinance.io/tendienomics/rewards-and-incentives"
-            target="_blank"
+            target="_self"
             rel="noreferrer"
           >
             staking details

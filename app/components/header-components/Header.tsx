@@ -24,22 +24,22 @@ const menuLinks = [
   {
     name: "Docs",
     link: "https://docs.lodestarfinance.io",
-    target: "_blank",
+    target: "_self",
   },
   {
     name: "Community",
     link: "https://t.co/2yYHcE44LZ",
-    target: "_blank",
+    target: "_self",
   },
   {
     name: "Mine",
     link: "https://mine.lodestarfinance.io/",
-    target: "_blank",
+    target: "_self",
   },
   {
     name: "Claim",
     link: "https://claim.lodestarfinance.io/",
-    target: "_blank",
+    target: "_self",
   },
 ];
 
