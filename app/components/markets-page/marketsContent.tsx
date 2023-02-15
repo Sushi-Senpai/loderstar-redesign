@@ -280,7 +280,7 @@ export default function MarketsContent() {
                       <a
                         className="relative text-white font-nova font-normal flex items-center w-full h-full pb-[30px] pt-[15px] md:pt-[24px] md:pb-[39px] pl-[15px] md:pl-[30px] pr-[15px] flex items-center justify-left text-sm md:text-base"
                         href={`/markets/${m.symbol}`}
-                        target="_blank"
+                        target="_self"
                         rel="noreferrer"
                       >
                         <img
@@ -296,7 +296,7 @@ export default function MarketsContent() {
                       <a
                         className="relative flex whitespace-nowrap md:whitespace-normal text-white font-nova font-normal items-center w-full h-full pb-[30px] pt-[15px] md:pt-[24px] md:pb-[39px] pl-[15px] pr-[15px]"
                         href={`/markets/${m.symbol}`}
-                        target="_blank"
+                        target="_self"
                         rel="noreferrer"
                       >
                         <div className="custom__hidden text-sm md:text-base">
@@ -318,7 +318,7 @@ export default function MarketsContent() {
                       <a
                         className="relative text-white font-nova font-normal flex items-center w-full h-full pl-[15px] pb-[30px] pb-[30px] pt-[15px] md:pt-[24px] md:pb-[39px] pl-[15px] pr-[15px]"
                         href={`/markets/${m.symbol}`}
-                        target="_blank"
+                        target="_self"
                         rel="noreferrer"
                       >
                         <div
@@ -424,7 +424,7 @@ export default function MarketsContent() {
                       <a
                         className="relative text-white font-nova font-normal flex items-center w-full h-full pl-[15px] pb-[30px] pb-[30px] pt-[15px] md:pt-[24px] md:pb-[39px] pl-[15px] pr-[15px]"
                         href={`/markets/${m.symbol}`}
-                        target="_blank"
+                        target="_self"
                         rel="noreferrer"
                       >
                         {isBorrowable && (
@@ -450,7 +450,7 @@ export default function MarketsContent() {
                       <a
                         className="relative text-white font-nova font-normal flex items-center w-full h-full pb-[30px] md:pt-[24px] pb-[30px] pt-[15px] md:pt-[24px] md:pb-[39px] pl-[15px] pr-[45px] md:pr-[30px]"
                         href={`/markets/${m.symbol}`}
-                        target="_blank"
+                        target="_self"
                         rel="noreferrer"
                       >
                         {isBorrowable && (

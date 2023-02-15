@@ -53,7 +53,7 @@ export default function ConfirmingTransaction({
       <a
         href={`${blockExplorerUrl}/tx/${txnHash}`}
         rel="noreferrer"
-        target="_blank"
+        target="_self"
         className="uppercase font-space font-bold text-base w-full max-w-[375px] flex justify-center items-center bg-[#E5D540] text-[#000] rounded-[6px] h-[50px] md:h-[60px] hover:bg-[#E5D540ce]"
       >
         VIEW ON EXPLORER

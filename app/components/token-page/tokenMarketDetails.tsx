@@ -160,7 +160,7 @@ function TokenMarketDetails({
           Reserve factor is a percentage of interest which goes to a collector
           contract that is controlled by{" "}
           <a
-            target="_blank"
+            target="_self"
             tabIndex={-1}
             className="line-solid cursor-pointer text-white"
             rel="noreferrer"
@@ -180,7 +180,7 @@ function TokenMarketDetails({
         <a
           className="flex group items-center justify-between text-white hover:text-[#E5D540]"
           href={contractUrl}
-          target="_blank"
+          target="_self"
           rel="noreferrer"
         >
           View Contract

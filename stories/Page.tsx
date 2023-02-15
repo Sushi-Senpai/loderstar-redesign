@@ -25,7 +25,7 @@ export const Page: React.VFC = () => {
           We recommend building UIs with a{" "}
           <a
             href="https://componentdriven.org"
-            target="_blank"
+            target="_self"
             rel="noopener noreferrer"
           >
             <strong>component-driven</strong>
@@ -51,7 +51,7 @@ export const Page: React.VFC = () => {
           Get a guided tutorial on component-driven development at{" "}
           <a
             href="https://storybook.js.org/tutorials/"
-            target="_blank"
+            target="_self"
             rel="noopener noreferrer"
           >
             Storybook tutorials
@@ -59,7 +59,7 @@ export const Page: React.VFC = () => {
           . Read more in the{" "}
           <a
             href="https://storybook.js.org/docs"
-            target="_blank"
+            target="_self"
             rel="noopener noreferrer"
           >
             docs

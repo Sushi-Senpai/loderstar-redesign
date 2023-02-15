@@ -123,8 +123,7 @@ export default function TwoPanels() {
                       onKeyUp={(e) =>
                         e.key === "Enter" &&
                         window.open(
-                          `/markets/${token.tokenPair.token.symbol}/`,
-                          "_blank"
+                          `/markets/${token.tokenPair.token.symbol}/`
                         )
                       }
                     >
@@ -132,7 +131,7 @@ export default function TwoPanels() {
                         <a
                           className="flex items-center h-full  relative items-center justify-left text-white font-nova font-normal pl-[14px] pb-[30px] md:pt-[24px] md:pb-[39px] pl-[15px] md:pl-[30px] pr-[15px]"
                           href={`/markets/${token.tokenPair.token.symbol}`}
-                          target="_blank"
+                          // target="_self"
                           rel="noreferrer"
                         >
                           <img
@@ -142,7 +141,7 @@ export default function TwoPanels() {
                             alt={token.tokenPair.token.symbol}
                           />
                           <span className="flex text-sm md:text-base">
-                            {'aaaa'}
+                            {token.tokenPair.token.symbol}
                           </span>
                         </a>
                       </td>
@@ -150,7 +149,7 @@ export default function TwoPanels() {
                         <a
                           className="relative flex items-center h-full  whitespace-nowrap md:whitespace-normal relative text-white font-nova font-normal pb-[30px] md:pt-[24px] md:pb-[39px] pl-[15px] pr-[15px] text-sm md:text-base"
                           href={`/markets/${token.tokenPair.token.symbol}`}
-                          target="_blank"
+                          // target="_self"
                           rel="noreferrer"
                         >
                           <div className="custom__hidden">
@@ -172,7 +171,7 @@ export default function TwoPanels() {
                         <a
                           className="flex items-center h-full  relative pl-[15px] pb-[30px] text-white font-nova font-normal md:pt-[24px] md:pb-[39px] pl-[15px] pr-[15px] text-sm md:text-base"
                           href={`/markets/${token.tokenPair.token.symbol}`}
-                          target="_blank"
+                          // target="_self"
                           rel="noreferrer"
                         >
                           <div
@@ -282,7 +281,7 @@ export default function TwoPanels() {
                         <a
                           className="flex items-center h-full relative text-white font-nova font-normal pb-[30px] md:pt-[24px] md:pb-[39px] pl-[15px] pr-[20px text-sm md:text-base]"
                           href={`/markets/${token.tokenPair.token.symbol}`}
-                          target="_blank"
+                          // target="_self"
                           rel="noreferrer"
                         >
                           <div className="custom__hidden">
@@ -348,8 +347,7 @@ export default function TwoPanels() {
                       onKeyUp={(e) =>
                         e.key === "Enter" &&
                         window.open(
-                          `/markets/${token.tokenPair.token.symbol}/`,
-                          "_blank"
+                          `/markets/${token.tokenPair.token.symbol}/`
                         )
                       }
                     >
@@ -357,7 +355,7 @@ export default function TwoPanels() {
                         <a
                           className="relative flex items-center h-full  text-white font-nova font-normal pl-[14px] pb-[30px] md:pt-[24px] md:pb-[39px] pl-[15px] md:pl-[30px] pr-[15px]"
                           href={`/markets/${token.tokenPair.token.symbol}`}
-                          target="_blank"
+                          // target="_self"
                           rel="noreferrer"
                         >
                           <div className="flex items-center justify-left">
@@ -377,7 +375,7 @@ export default function TwoPanels() {
                         <a
                           className="flex items-center h-full relative whitespace-nowrap md:whitespace-normal relative text-white font-nova font-normal pb-[30px] md:pt-[24px] md:pb-[39px] pl-[15px] pr-[15px] text-sm md:text-base"
                           href={`/markets/${token.tokenPair.token.symbol}`}
-                          target="_blank"
+                          // target="_self"
                           rel="noreferrer"
                         >
                           <div className="custom__hidden">
@@ -399,7 +397,7 @@ export default function TwoPanels() {
                         <a
                           className="flex items-center h-full relative pl-[15px] pb-[30px] text-white font-nova font-normal md:pt-[24px] md:pb-[39px] pl-[15px] pr-[15px] text-sm md:text-base"
                           href={`/markets/${token.tokenPair.token.symbol}`}
-                          target="_blank"
+                          // target="_self"
                           rel="noreferrer"
                         >
                           <div
@@ -509,7 +507,7 @@ export default function TwoPanels() {
                         <a
                           className="flex items-center h-full relative text-white font-nova font-normal pb-[30px] md:pt-[24px] md:pb-[39px] pl-[15px] pr-[20px text-sm md:text-base]"
                           href={`/markets/${token.tokenPair.token.symbol}`}
-                          target="_blank"
+                          // target="_self"
                           rel="noreferrer"
                         >
                           <div className="custom__hidden">
@@ -582,8 +580,7 @@ export default function TwoPanels() {
                       onKeyUp={(e) =>
                         e.key === "Enter" &&
                         window.open(
-                          `/markets/${token.tokenPair.token.symbol}/`,
-                          "_blank"
+                          `/markets/${token.tokenPair.token.symbol}/`
                         )
                       }
                     >
@@ -591,7 +588,7 @@ export default function TwoPanels() {
                         <a
                           className="flex items-center h-full relative text-white font-nova font-normal pl-[14px] pb-[30px] md:pt-[24px] md:pb-[39px] pl-[15px] md:pl-[30px] pr-[15px]"
                           href={`/markets/${token.tokenPair.token.symbol}`}
-                          target="_blank"
+                          // target="_self"
                           rel="noreferrer"
                         >
                           <div className="flex items-center justify-left">
@@ -611,7 +608,7 @@ export default function TwoPanels() {
                         <a
                           className="flex items-center h-full whitespace-nowrap md:whitespace-normal relative text-white font-nova font-normal pb-[30px] md:pt-[24px] md:pb-[39px] pl-[15px] pr-[15px] text-sm md:text-base"
                           href={`/markets/${token.tokenPair.token.symbol}`}
-                          target="_blank"
+                          // target="_self"
                           rel="noreferrer"
                         >
                           <div className="custom__hidden">
@@ -633,7 +630,7 @@ export default function TwoPanels() {
                         <a
                           className="flex items-center h-full relative pl-[15px] pb-[30px] text-white font-nova font-normal md:pt-[24px] md:pb-[39px] pl-[15px] pr-[15px] text-sm md:text-base"
                           href={`/markets/${token.tokenPair.token.symbol}`}
-                          target="_blank"
+                          // target="_self"
                           rel="noreferrer"
                         >
                           <div
@@ -739,7 +736,7 @@ export default function TwoPanels() {
                         <a
                           className="flex items-center h-full relative text-white font-nova font-normal pb-[30px] md:pt-[24px] md:pb-[39px] pl-[15px] pr-[20px text-sm md:text-base]"
                           href={`/markets/${token.tokenPair.token.symbol}`}
-                          target="_blank"
+                          // target="_self"
                           rel="noreferrer"
                         >
                           <div className="custom__hidden">
@@ -804,8 +801,7 @@ export default function TwoPanels() {
                       onKeyUp={(e) =>
                         e.key === "Enter" &&
                         window.open(
-                          `/markets/${token.tokenPair.token.symbol}/`,
-                          "_blank"
+                          `/markets/${token.tokenPair.token.symbol}/`
                         )
                       }
                     >
@@ -813,7 +809,7 @@ export default function TwoPanels() {
                         <a
                           className="flex items-center h-full relative text-white font-nova font-normal pl-[14px] pb-[30px] md:pt-[24px] md:pb-[39px] pl-[15px] md:pl-[30px] pr-[15px]"
                           href={`/markets/${token.tokenPair.token.symbol}`}
-                          target="_blank"
+                          // target="_self"
                           rel="noreferrer"
                         >
                           <div className="flex items-center justify-left">
@@ -833,7 +829,7 @@ export default function TwoPanels() {
                         <a
                           className="flex items-center h-full whitespace-nowrap md:whitespace-normal relative text-white font-nova font-normal pb-[30px] md:pt-[24px] md:pb-[39px] pl-[15px] pr-[15px] text-sm md:text-base"
                           href={`/markets/${token.tokenPair.token.symbol}`}
-                          target="_blank"
+                          // target="_self"
                           rel="noreferrer"
                         >
                           <div className="custom__hidden">
@@ -855,7 +851,7 @@ export default function TwoPanels() {
                         <a
                           className="flex items-center h-full relative pl-[15px] pb-[30px] text-white font-nova font-normal md:pt-[24px] md:pb-[39px] pl-[15px] pr-[15px] text-sm md:text-base"
                           href={`/markets/${token.tokenPair.token.symbol}`}
-                          target="_blank"
+                          // target="_self"
                           rel="noreferrer"
                         >
                           <div
@@ -961,7 +957,7 @@ export default function TwoPanels() {
                         <a
                           className="flex items-center h-full relative text-white font-nova font-normal pb-[30px] md:pt-[24px] md:pb-[39px] pl-[15px] pr-[20px text-sm md:text-base]"
                           href={`/markets/${token.tokenPair.token.symbol}`}
-                          target="_blank"
+                          // target="_self"
                           rel="noreferrer"
                         >
                           <div className="custom__hidden">

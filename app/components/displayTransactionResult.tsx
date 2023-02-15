@@ -7,7 +7,7 @@ export function displayTransactionResult(networkData: NetworkData, hash: string,
   toast.success(() => (
     <p>
       <a
-        target="_blank"
+        target="_self"
         rel="noreferrer"
         href={`${networkData.blockExplorerUrl}/tx/${hash}`}
       >

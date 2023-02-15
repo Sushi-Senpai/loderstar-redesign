@@ -49,7 +49,7 @@ export default function Footer() {
                 aria-label={item.label}
                 href={item.url}
                 key={item.label}
-                target="_blank"
+                target="_self"
                 rel="noreferrer"
               >
                 <img

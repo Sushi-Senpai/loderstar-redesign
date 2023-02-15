@@ -12,7 +12,7 @@ export function displayErrorMessage(networkData: NetworkData, error: any, defaul
     toast.error(() => (
       <p>
         <a
-          target="_blank"
+          target="_self"
           rel="noreferrer"
           href={`${networkData.blockExplorerUrl}/tx/${error.transactionHash}`}
         >

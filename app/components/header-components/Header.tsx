@@ -3,6 +3,7 @@ import NetworksDropdown from "./networksDropdown";
 import ConnectWallet from "./connect-wallet";
 import { useLocation } from "react-router-dom";
 import ClaimRewardsModal from "../claimRewardsModal/claimRewardsModal";
+import { Web3Button } from "@web3modal/react";
 
 const menuLinks = [
   {
@@ -24,27 +25,27 @@ const menuLinks = [
   {
     name: "Docs",
     link: "https://docs.lodestarfinance.io",
-    target: "_blank",
+    target: "_self",
   },
   {
     name: "Community",
     link: "https://t.co/2yYHcE44LZ",
-    target: "_blank",
+    target: "_self",
   },
   {
     name: "Mine",
     link: "https://mine.lodestarfinance.io/",
-    target: "_blank",
+    target: "_self",
   },
   {
     name: "Claim",
     link: "https://claim.lodestarfinance.io/",
-    target: "_blank",
+    target: "_self",
   },
 ];
 
 export default function Header() {
-  let location = useLocation();
+  // let location = useLocation();
   const burgerRef = useRef<any>(null);
   const menuRef = useRef<any>(null);
   const [activePopupMenu, setActivePopupMenu] = useState<boolean>(false);
@@ -120,9 +121,7 @@ export default function Header() {
               (item: { name: string; link: string; target: string }) => (
                 <a
                   key={item.name}
-                  className={`cursor-pointer hover:text-white ${
-                    location.pathname === item.link ? "text-white" : ""
-                  }`}
+                  className={`cursor-pointer hover:text-white ${"text-white"}`}
                   href={item.link}
                   target={item.target}
                   rel="noreferrer"
@@ -159,7 +158,7 @@ export default function Header() {
               </div>
             )} */}
             <NetworksDropdown />
-            <ConnectWallet />
+            <Web3Button />
             <button
               aria-label="menu"
               className={`flex lg:hidden header__burg ${
@@ -196,7 +195,7 @@ export default function Header() {
                 )}
               </div>
               <div className="mt-[40px] flex justify-center">
-                <ConnectWallet inMenu={true} />
+                <Web3Button />
               </div>
             </div>
           </div>
