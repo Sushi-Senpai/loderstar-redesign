@@ -25,22 +25,22 @@ const menuLinks = [
   {
     name: "Docs",
     link: "https://docs.lodestarfinance.io",
-    target: "_self",
+    target: "_blank",
   },
   {
     name: "Community",
     link: "https://t.co/2yYHcE44LZ",
-    target: "_self",
+    target: "_blank",
   },
   {
     name: "Mine",
     link: "https://mine.lodestarfinance.io/",
-    target: "_self",
+    target: "_blank",
   },
   {
     name: "Claim",
     link: "https://claim.lodestarfinance.io/",
-    target: "_self",
+    target: "_blank",
   },
 ];
 
@@ -195,7 +195,7 @@ export default function Header() {
                 )}
               </div>
               <div className="mt-[40px] flex justify-center">
-                <Web3Button />
+                <ConnectWallet inMenu={true} />
               </div>
             </div>
           </div>
