@@ -45,7 +45,7 @@ const menuLinks = [
 ];
 
 export default function Header() {
-  // let location = useLocation();
+  let location = useLocation();
   const burgerRef = useRef<any>(null);
   const menuRef = useRef<any>(null);
   const [activePopupMenu, setActivePopupMenu] = useState<boolean>(false);

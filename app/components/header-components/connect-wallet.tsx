@@ -14,7 +14,7 @@ export default function ConnectWallet({ inMenu }: { inMenu?: boolean }) {
   useEffect(() => {
     setOnClient(true);
     if (!isDisconnected()) {
-      // void metaMask.connectEagerly();
+      void metaMask.connectEagerly();
     }
   }, [isDisconnected]);
 
